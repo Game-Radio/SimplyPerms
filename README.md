@@ -1,7 +1,7 @@
 SimplyPerms
 ===========
 
-## *When powerful plugin made Permissions easy !*
+### *When powerful plugin made Permissions easy !*
 
 SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit ideas with the new Configuration API.
 
@@ -9,13 +9,13 @@ SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit
 
 *Source code is included in the jar file !*
 
-# [Commands][2]
+## [Commands][2]
 
-# [Permissions and authorizations][3]
+## [Permissions and authorizations][3]
 
-# [Import from other plugins][4]
+## [Import from other plugins][4]
 
-# Configuration
+## Configuration
 
 The configuration file is slightly the same than PermissionsBukkit.
 
@@ -23,18 +23,18 @@ Please refer to the [PermissionsBukkit documentation][5]
 An example configuration file [can be found here][6]  
 For the database connection, [please refer to this page][7]
 
-# Thanks
+## Thanks
 
 *   [PermissionsBukkit][8] by SpaceManiac for core permissions code
 *   [AntiGuest][9] by QuickWango for part of authorizations feature
 
-# Todo
+## Todo
 
 *   Document the database mecanism and setup
 *   Import from other Permissions Plugins
 *   **Feel free to ask me new features, improvements or bugs :D**
 
-# Donations
+## Donations
 
 I make my plugins with my free time and for free, if you like my work, you can buy me a coffee :D
 
