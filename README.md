@@ -1,38 +1,49 @@
 SimplyPerms
 ===========
 
-=== ''When powerful plugin made Permissions easy !'' ===
+### *When powerful plugin made Permissions easy !*
 
 SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit ideas with the new Configuration API.
 
-'''WARNING : SimplyPerms is not compatible with PermissionsBukkit or other Permissions plugins, don't forget to disable all this plugins before install this !'''
+**WARNING : SimplyPerms is not compatible with PermissionsBukkit or other Permissions plugins, don't forget to disable all this plugins before install this !**
 
-''Source code is included in the jar file !''
+*Source code is included in the jar file !*
 
-== [http://dev.bukkit.org/server-mods/simplyperms/pages/commands/ Commands] ==
+## [Commands][2]
 
-== [http://dev.bukkit.org/server-mods/simplyperms/pages/permissions-and-authorizations/ Permissions and authorizations] ==
+## [Permissions and authorizations][3]
 
-== [http://dev.bukkit.org/server-mods/simplyperms/pages/import-from-other-plugins/ Import from other plugins] ==
+## [Import from other plugins][4]
 
-== Configuration ==
+## Configuration
 
 The configuration file is slightly the same than PermissionsBukkit.
 
-Please refer to the [http://dev.bukkit.org/server-mods/permbukkit/pages/configuration/ PermissionsBukkit documentation]<br />An example configuration file [http://dev.bukkit.org/server-mods/simplyperms/pages/exemple-of-config-yml/ can be found here]<br />For the database connection, [http://dev.bukkit.org/server-mods/simplyperms/pages/database-connection/ please refer to this page]
+Please refer to the [PermissionsBukkit documentation][5]  
+An example configuration file [can be found here][6]  
+For the database connection, [please refer to this page][7]
 
-== Thanks ==
+## Thanks
 
-* [http://dev.bukkit.org/server-mods/permbukkit/ PermissionsBukkit] by SpaceManiac for core permissions code
-* [http://dev.bukkit.org/server-mods/antiguest/ Antiguest] by QuickWango for part of authorizations feature
+*   [PermissionsBukkit][8] by SpaceManiac for core permissions code
+*   [Antiguest][9] by QuickWango for part of authorizations feature
 
-== Todo ==
+## Todo
 
-* Document the database mecanism and setup
-* Import form PermissionsBukkit
-* Import from other Permissions Plugins
-* '''Feel free to ask me new features, improuvements or bugs :D'''
+*   Document the database mecanism and setup
+*   Import form PermissionsBukkit
+*   Import from other Permissions Plugins
+*   **Feel free to ask me new features, improuvements or bugs :D**
 
-== Donations ==
+## Donations
 
 I make my plugins with my free time and for free, if you like my work, you can buy me a coffee :D
+
+ [2]: http://dev.bukkit.org/server-mods/simplyperms/pages/commands/
+ [3]: http://dev.bukkit.org/server-mods/simplyperms/pages/permissions-and-authorizations/
+ [4]: http://dev.bukkit.org/server-mods/simplyperms/pages/import-from-other-plugins/
+ [5]: http://dev.bukkit.org/server-mods/permbukkit/pages/configuration/
+ [6]: http://dev.bukkit.org/server-mods/simplyperms/pages/exemple-of-config-yml/
+ [7]: http://dev.bukkit.org/server-mods/simplyperms/pages/database-connection/
+ [8]: http://dev.bukkit.org/server-mods/permbukkit/
+ [9]: http://dev.bukkit.org/server-mods/antiguest/
