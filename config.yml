@@ -1,0 +1,44 @@
+debug: false
+db:
+    type: file
+    database: minecraft
+    host: localhost
+    port: 3306
+    user: root
+    pass: pass
+    table:
+        players: players
+        groups: groups
+    column:
+        playerid: playerid
+        groupname: groupname
+        permission: permission
+        world: world
+        value: value
+        date: date
+users:
+    ConspiracyWizard:
+        permissions:
+            permissions.example: true
+        groups:
+        - admin
+groups:
+    default:
+        permissions:
+            permissions.allow.build: false
+    admin:
+        permissions:
+            permissions.*: true
+        inheritance:
+        - user
+    user:
+        permissions:
+            permissions.allow.build: true
+        worlds:
+            creative:
+                coolplugin.item: true
+        inheritance:
+        - default
+messages:
+    all: '&cYou can''t do this.'
+    build: '&cYou do not have permission to build here.'
