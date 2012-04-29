@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import net.crystalyx.bukkit.simplyperms.imports.ImportDB;
 import net.crystalyx.bukkit.simplyperms.imports.ImportFile;
 import net.crystalyx.bukkit.simplyperms.imports.ImportManager;
 import net.crystalyx.bukkit.simplyperms.imports.ImportPermBukkit;
+import net.crystalyx.bukkit.simplyperms.imports.ImportPermEx;
 import net.crystalyx.bukkit.simplyperms.imports.ImportPrivileges;
 
 import org.bukkit.ChatColor;
@@ -168,6 +170,8 @@ public class SimplyCommands implements CommandExecutor {
         		manager = new ImportPermBukkit(plugin);
         	} else if (pluginName.equals("privileges")) {
         		manager = new ImportPrivileges(plugin);
+        	} else if (pluginName.equals("permissionsex")) {
+        		manager = new ImportPermEx(plugin);
         	} else if (pluginName.equals("file")) {
         		manager = new ImportFile(plugin);
         	} else if (plugin.getConfig().getString("db/type") != null
@@ -227,7 +231,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Users in " + ChatColor.WHITE + group + ChatColor.GREEN + " (" + ChatColor.WHITE + count + ChatColor.GREEN + "): " + ChatColor.WHITE + text);
             return true;
         } else if (subcommand.equals("setperm")) {
-            if (!checkPerm(sender, "group.setperm")) return true;
+        	if (split.length >= 4 && !checkPerm(sender, "group.setperm", Arrays.asList(split[3].split(",")))) return true;
             if (split.length != 4 && split.length != 5) return usage(sender, command, "group setperm");
             String group = split[2];
             String perm = split[3];
@@ -254,7 +258,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Group " + ChatColor.WHITE + group + ChatColor.GREEN + " now has " + ChatColor.WHITE + perm + ChatColor.GREEN + " = " + ChatColor.WHITE + value + ChatColor.GREEN + ".");
             return true;
         } else if (subcommand.equals("unsetperm")) {
-            if (!checkPerm(sender, "group.unsetperm")) return true;
+        	if (split.length >= 4 && !checkPerm(sender, "group.unsetperm", Arrays.asList(split[3].split(",")))) return true;
             if (split.length != 4) return usage(sender, command, "group unsetperm");
             String group = split[2].toLowerCase();
             String perm = split[3];
@@ -312,7 +316,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is in groups (" + ChatColor.WHITE + count + ChatColor.GREEN + "): " + ChatColor.WHITE + text);
             return true;
         } else if (subcommand.equals("setgroup")) {
-            if (!checkPerm(sender, "player.setgroup")) return true;
+        	if (split.length == 4 && !checkPerm(sender, "player.setgroup", Arrays.asList(split[3].split(",")))) return true;
             if (split.length != 4) return usage(sender, command, "player setgroup");
             String player = split[2].toLowerCase();
             String[] groups = split[3].split(",");
@@ -327,7 +331,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is now in " + ChatColor.WHITE + split[3] + ChatColor.GREEN + ".");
             return true;
         } else if (subcommand.equals("addgroup")) {
-            if (!checkPerm(sender, "player.addgroup")) return true;
+        	if (split.length == 4 && !checkPerm(sender, "player.addgroup", Arrays.asList(split[3]))) return true;
             if (split.length != 4) return usage(sender, command, "player addgroup");
             String player = split[2].toLowerCase();
             String group = split[3];
@@ -343,7 +347,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is now in " + ChatColor.WHITE + group + ChatColor.GREEN + ".");
             return true;
         } else if (subcommand.equals("removegroup")) {
-            if (!checkPerm(sender, "player.removegroup")) return true;
+        	if (split.length == 4 && !checkPerm(sender, "player.removegroup", Arrays.asList(split[3]))) return true;
             if (split.length != 4) return usage(sender, command, "player removegroup");
             String player = split[2].toLowerCase();
             String group = split[3];
@@ -374,7 +378,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is no longer in config file.");
             return true;
         } else if (subcommand.equals("setperm")) {
-            if (!checkPerm(sender, "player.setperm")) return true;
+        	if (split.length >= 4 && !checkPerm(sender, "player.setperm", Arrays.asList(split[3].split(",")))) return true;
             if (split.length != 4 && split.length != 5) return usage(sender, command, "player setperm");
             String player = split[2].toLowerCase();
             String perm = split[3];
@@ -392,7 +396,7 @@ public class SimplyCommands implements CommandExecutor {
             sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " now has " + ChatColor.WHITE + perm + ChatColor.GREEN + " = " + ChatColor.WHITE + value + ChatColor.GREEN + ".");
             return true;
         } else if (subcommand.equals("unsetperm")) {
-            if (!checkPerm(sender, "player.unsetperm")) return true;
+        	if (split.length >= 4 && !checkPerm(sender, "player.unsetperm", Arrays.asList(split[3].split(",")))) return true;
             if (split.length != 4) return usage(sender, command, "player unsetperm");
             String player = split[2].toLowerCase();
             String perm = split[3];
@@ -422,6 +426,27 @@ public class SimplyCommands implements CommandExecutor {
     
     private boolean checkPerm(CommandSender sender, String subnode) {
         boolean ok = sender.hasPermission("permissions." + subnode);
+        if (!ok) {
+            sender.sendMessage(ChatColor.RED + "You do not have permissions to do that.");
+        }
+        return ok;
+    }
+    
+    private boolean checkPerm(CommandSender sender, String node, List<String> subnodes) {
+    	boolean ok = sender.hasPermission("permissions." + node);
+    	if (!ok) {
+    		for (String subnode : subnodes) {
+    			String testnode = "";
+    			for (String sub : subnode.split(".")) {
+    				testnode += sub;
+        			if (sender.hasPermission("permissions." + node + "." + testnode)) {
+        				ok = true;
+        				break;
+        			}
+    			}
+    			if (ok) break;
+    		}
+    	}
         if (!ok) {
             sender.sendMessage(ChatColor.RED + "You do not have permissions to do that.");
         }

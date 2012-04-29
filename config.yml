@@ -1,4 +1,5 @@
 debug: false
+default: default
 db:
     type: file
     database: minecraft

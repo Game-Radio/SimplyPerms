@@ -16,6 +16,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,13 +33,27 @@ public class SimplyPlugin extends JavaPlugin {
     // -- Basic stuff
 	@Override
 	public void onEnable() {
+		// Unregister existing PermissionsBukkit nodes
+		if (getServer().getPluginManager().isPluginEnabled("PermissionsBukkit")) {
+			for (Permission perm : getServer().getPluginManager().getPlugin("PermissionsBukkit").getDescription().getPermissions()) {
+				getServer().getPluginManager().removePermission(perm);
+			}
+		}
+
+		// Disable others permissions plugin
+		for (String permPlugin : getDescription().getSoftDepend()) {
+			if (getServer().getPluginManager().isPluginEnabled(permPlugin)) {
+				getServer().getPluginManager().disablePlugin(getServer().getPluginManager().getPlugin(permPlugin));
+			}
+		}
+
         // Take care of configuration
         configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
             saveDefaultConfig();
         }
         reloadConfig();
-		
+
         // Register stuff
 		getCommand("permissions").setExecutor(commandExecutor);
 		getServer().getPluginManager().registerEvents(playerListener, this);
@@ -146,7 +161,7 @@ public class SimplyPlugin extends JavaPlugin {
         }
     }
 	
-    protected ConfigurationSection getNode(String node) {
+    public ConfigurationSection getNode(String node) {
         for (String entry : getConfig().getKeys(true)) {
             if (node.equalsIgnoreCase(entry) && getConfig().isConfigurationSection(entry)) {
                 return getConfig().getConfigurationSection(entry);
@@ -213,13 +228,14 @@ public class SimplyPlugin extends JavaPlugin {
     // -- Private stuff
     
     private Map<String, Boolean> calculatePlayerPermissions(String player, String world) {
+    	String default_group = getConfig().getString("default", "default");
         if (!config.isPlayerInDB(player)) {
-            return calculateGroupPermissions("default", world);
+            return calculateGroupPermissions(default_group, world);
         }
 
         Map<String, Boolean> perms = new HashMap<String, Boolean>();
         List<String> groups = config.getPlayerGroups(player);
-        if (groups.isEmpty()) groups.add("default");
+        if (groups.isEmpty()) groups.add(default_group);
         
         for (Entry<String, Boolean> entry : config.getPlayerPermissions(player).entrySet()) {
         	perms.put(entry.getKey(), entry.getValue());

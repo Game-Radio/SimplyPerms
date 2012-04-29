@@ -108,7 +108,7 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	public List<String> getGroupWorlds(String group) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		if (plugin.getNode("groups/" + group + "/worlds") != null) {
 			return new ArrayList<String>(plugin.getNode("groups/" + group + "/worlds").getKeys(false));
 		}
@@ -118,31 +118,31 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	public List<String> getGroupInheritance(String group) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		return plugin.getConfig().getStringList("groups/" + group + "/inheritance");
 	}
 
 	public void addGroupInheritance(String group, String inherit) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		List<String> inheritances = getGroupInheritance(group);
 		if (!inheritances.contains(inherit)) inheritances.add(inherit);
 		plugin.getConfig().set("groups/" + group + "/inheritance", inheritances);
 	}
 
 	public void removeGroupInheritance(String group, String inherit) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		List<String> inheritances = getGroupInheritance(group);
 		inheritances.remove(inherit);
 		plugin.getConfig().set("groups/" + group + "/inheritance", inheritances);
 	}
 	
 	public void removeGroupInheritances(String group) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		plugin.getConfig().set("groups/" + group + "/inheritance", null);
 	}
 
 	public Map<String, Boolean> getGroupPermissions(String group, String world) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		Map<String, Boolean> finalPerms = new HashMap<String, Boolean>();
 		String permNode = (!world.isEmpty()) ? "groups/" + group + "/worlds/" + world : "groups/" + group + "/permissions";
 		if (plugin.getNode(permNode) != null) {
@@ -158,7 +158,7 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	public void addGroupPermission(String group, String world, String permission, boolean value) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		Map<String, Boolean> permissions = getGroupPermissions(group, world);
 		if (permissions.containsKey(permission)) permissions.remove(permission);
 		permissions.put(permission, value);
@@ -175,7 +175,7 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	public void removeGroupPermission(String group, String world, String permission) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		Map<String, Boolean> permissions = getGroupPermissions(group, world);
 		permissions.remove(permission);
 		if (!world.isEmpty()) {
@@ -191,15 +191,11 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	public void removeGroupPermissions(String group) {
-		if (group.isEmpty()) group = "default";
+		if (group.isEmpty()) group = getDefaultGroup();
 		plugin.getConfig().set("groups/" + group + "/permissions", null);
 	}
 
 	public void removeGroup(String group) {
-		if (group.isEmpty() || group.equals("default")) {
-			plugin.debug("You can't delete default group !");
-			return;
-		}
 		plugin.getConfig().set("groups/" + group, null);
 	}
 
@@ -224,12 +220,21 @@ public class SimplyAPI implements PermsConfig {
 		plugin.getConfig().set("messages", messages);
 	}
 
+	public String getDefaultGroup() {
+		return plugin.getConfig().getString("default", "default");
+	}
+
+	public void setDefaultGroup(String group) {
+		if (group.isEmpty()) group = "default";
+		plugin.getConfig().set("default", group);
+	}
+
 	public void refreshPermissions() {
 		plugin.refreshPermissions();
 	}
 
 	protected List<String> getKeys(YamlConfiguration config, String node) {
-		if (config.getConfigurationSection(node) != null) {
+		if (config.isConfigurationSection(node)) {
 			return new ArrayList<String>(config.getConfigurationSection(node).getKeys(false));
 		}
 		else {

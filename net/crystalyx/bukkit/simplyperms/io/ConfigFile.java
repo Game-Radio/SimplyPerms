@@ -35,7 +35,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public void addPlayerGroup(String player, String group) {
-		if (group.isEmpty() || group.equals("default")) return;
+		if (group.isEmpty()) return;
 		List<String> groups = getPlayerGroups(player);
 		if (!groups.contains(group)) groups.add(group);
 		plugin.getConfig().set("users/" + player + "/groups", groups);
@@ -108,8 +108,8 @@ public class ConfigFile implements PermsConfig {
 	public Map<String, Boolean> getPlayerPermissions(String player, String world) {
 		Map<String, Boolean> finalPerms = new HashMap<String, Boolean>();
 		String permNode = (!world.isEmpty()) ? "users/" + player + "/worlds/" + world : "users/" + player + "/permissions";
-		if (plugin.getConfig().getConfigurationSection(permNode) != null) {
-			for (Entry<String, Object> permPlayer : plugin.getConfig().getConfigurationSection(permNode).getValues(false).entrySet()) {
+		if (plugin.getNode(permNode) != null) {
+			for (Entry<String, Object> permPlayer : plugin.getNode(permNode).getValues(false).entrySet()) {
 				finalPerms.put(permPlayer.getKey(), (Boolean) permPlayer.getValue());
 			}
 		}
@@ -118,13 +118,13 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public boolean isPlayerInDB(String player) {
-		return plugin.getConfig().getConfigurationSection("users/" + player) != null;
+		return plugin.getNode("users/" + player) != null;
 	}
 
 	@Override
 	public List<String> getPlayerWorlds(String player) {
-		if (plugin.getConfig().getConfigurationSection("users/" + player + "/worlds") != null) {
-			return new ArrayList<String>(plugin.getConfig().getConfigurationSection("users/" + player + "/worlds").getKeys(false));
+		if (plugin.getNode("users/" + player + "/worlds") != null) {
+			return new ArrayList<String>(plugin.getNode("users/" + player + "/worlds").getKeys(false));
 		}
 		else {
 			return new ArrayList<String>();
@@ -133,8 +133,8 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public List<String> getAllPlayers() {
-		if (plugin.getConfig().getConfigurationSection("users") != null) {
-			return new ArrayList<String>(plugin.getConfig().getConfigurationSection("users").getKeys(false));
+		if (plugin.getNode("users") != null) {
+			return new ArrayList<String>(plugin.getNode("users").getKeys(false));
 		}
 		else {
 			return new ArrayList<String>();

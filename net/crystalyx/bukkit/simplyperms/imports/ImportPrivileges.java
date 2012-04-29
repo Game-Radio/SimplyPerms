@@ -20,7 +20,7 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 	public void run() throws Exception {
 		try {
 			privileges.load("plugins/Privileges/config.yml");
-			String defaultGroup = privileges.getString("default_group");
+			setDefaultGroup(privileges.getString("default_group"));
 			plugin.getConfig().set("debug", privileges.getBoolean("debug"));
 
 			privileges.load("plugins/Privileges/users.yml");
@@ -28,32 +28,30 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 				addPlayerGroup(player, privileges.getString("users." + player + ".group"));
 
 				for (String permission : privileges.getStringList("users." + player + ".permissions")) {
-					addPlayerPermission(player, permission, !permission.contains("-"));
+					addPlayerPermission(player, permission.replace("-", ""), !permission.startsWith("-"));
 				}
 				
 				for (String world : getKeys(privileges, "users." + player + ".worlds")) {
 					for (String worldpermission : privileges.getStringList("users." + player + ".worlds." + world)) {
-						addPlayerPermission(player, world, worldpermission, !worldpermission.contains("-"));
+						addPlayerPermission(player, world, worldpermission.replace("-", ""), !worldpermission.startsWith("-"));
 					}
 				}
 			}
 
 			privileges.load("plugins/Privileges/groups.yml");
 			for (String group : getKeys(privileges, "groups")) {
-				String simplyGroup = (group.equals(defaultGroup)) ? "default" : group;
-				
 				for (String permission : privileges.getStringList("groups." + group + ".permissions")) {
-					addGroupPermission(simplyGroup, permission, !permission.contains("-"));
+					addGroupPermission(group, permission.replace("-", ""), !permission.startsWith("-"));
 				}
 				
 				for (String world : getKeys(privileges, "groups." + group + ".worlds")) {
 					for (String worldpermission : privileges.getStringList("groups." + group + ".worlds." + world)) {
-						addGroupPermission(simplyGroup, world, worldpermission, !worldpermission.contains("-"));
+						addGroupPermission(group, world, worldpermission.replace("-", ""), !worldpermission.startsWith("-"));
 					}
 				}
 				
 				for (String inherit : privileges.getStringList("groups." + group + ".inheritance")) {
-					addGroupInheritance(simplyGroup, inherit);
+					addGroupInheritance(group, inherit);
 				}
 			}
 		} catch (Exception e) {
