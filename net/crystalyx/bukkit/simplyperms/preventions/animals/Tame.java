@@ -20,5 +20,5 @@ public class Tame extends SimplyPrevents {
 			prevent(event, (Player) event.getOwner(), "tame,animals,interact");
 		}
 	}
-	
+
 }

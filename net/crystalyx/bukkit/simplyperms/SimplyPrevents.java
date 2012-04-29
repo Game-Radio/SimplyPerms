@@ -70,7 +70,7 @@ public abstract class SimplyPrevents implements Listener {
 			throttleTimestamps.put(player, Long.valueOf(current + 3000));
 		}
 	}
-	
+
 	private void deny(Cancellable event, Player player, String node) {
 		event.setCancelled(true);
 		if (plugin.getConfig().getString("messages/" + node) != null) {

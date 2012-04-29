@@ -9,7 +9,7 @@ public class ImportPermEx extends SimplyAPI implements ImportManager {
 
 	private SimplyPlugin plugin;
 	private YamlConfiguration permEx;
-	
+
 	public ImportPermEx(SimplyPlugin plugin) {
 		super(plugin);
 		this.plugin = plugin;
@@ -22,12 +22,12 @@ public class ImportPermEx extends SimplyAPI implements ImportManager {
 			permEx.load("plugins/PermissionsEx/config.yml");
 			plugin.getConfig().set("debug", permEx.getBoolean("permissions.debug"));
 			permEx.load("plugins/PermissionsEx/" + permEx.getString("permissions.backends.file.file"));
-			
+
 			for (String player : getKeys(permEx, "users")) {
 				for (String group : permEx.getStringList("users." + player + ".group")) {
 					addPlayerGroup(player, group);
 				} 
-				
+
 				for (String perm : permEx.getStringList("users." + player + ".permissions")) {
 					addPlayerPermission(player, perm.replace("-", ""), !perm.startsWith("-"));
 				}

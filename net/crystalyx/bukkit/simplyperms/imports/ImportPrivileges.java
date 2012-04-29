@@ -30,7 +30,7 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 				for (String permission : privileges.getStringList("users." + player + ".permissions")) {
 					addPlayerPermission(player, permission.replace("-", ""), !permission.startsWith("-"));
 				}
-				
+
 				for (String world : getKeys(privileges, "users." + player + ".worlds")) {
 					for (String worldpermission : privileges.getStringList("users." + player + ".worlds." + world)) {
 						addPlayerPermission(player, world, worldpermission.replace("-", ""), !worldpermission.startsWith("-"));
@@ -43,13 +43,13 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 				for (String permission : privileges.getStringList("groups." + group + ".permissions")) {
 					addGroupPermission(group, permission.replace("-", ""), !permission.startsWith("-"));
 				}
-				
+
 				for (String world : getKeys(privileges, "groups." + group + ".worlds")) {
 					for (String worldpermission : privileges.getStringList("groups." + group + ".worlds." + world)) {
 						addGroupPermission(group, world, worldpermission.replace("-", ""), !worldpermission.startsWith("-"));
 					}
 				}
-				
+
 				for (String inherit : privileges.getStringList("groups." + group + ".inheritance")) {
 					addGroupInheritance(group, inherit);
 				}

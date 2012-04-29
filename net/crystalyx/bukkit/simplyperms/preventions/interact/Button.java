@@ -10,7 +10,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Button extends SimplyPrevents {
-	
+
 	public Button(SimplyPlugin plugin) {
 		super(plugin);
 	}
@@ -25,5 +25,5 @@ public class Button extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

@@ -43,5 +43,5 @@ public class Damage extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

@@ -23,14 +23,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class SimplyPlugin extends JavaPlugin {
 
 	protected PermsConfig config;
-    private SimplyPlayer playerListener = new SimplyPlayer(this);
-    private SimplyCommands commandExecutor = new SimplyCommands(this);
+	private SimplyPlayer playerListener = new SimplyPlayer(this);
+	private SimplyCommands commandExecutor = new SimplyCommands(this);
 	private HashMap<String, PermissionAttachment> permissions = new HashMap<String, PermissionAttachment>();
 
 	private File configFile;
-    private YamlConfiguration YamlConfig;
-	
-    // -- Basic stuff
+	private YamlConfiguration YamlConfig;
+
+	// -- Basic stuff
 	@Override
 	public void onEnable() {
 		// Unregister existing PermissionsBukkit nodes
@@ -47,55 +47,55 @@ public class SimplyPlugin extends JavaPlugin {
 			}
 		}
 
-        // Take care of configuration
-        configFile = new File(getDataFolder(), "config.yml");
-        if (!configFile.exists()) {
-            saveDefaultConfig();
-        }
-        reloadConfig();
+		// Take care of configuration
+		configFile = new File(getDataFolder(), "config.yml");
+		if (!configFile.exists()) {
+			saveDefaultConfig();
+		}
+		reloadConfig();
 
-        // Register stuff
+		// Register stuff
 		getCommand("permissions").setExecutor(commandExecutor);
 		getServer().getPluginManager().registerEvents(playerListener, this);
 		registerEvents();
 
-        // Register everyone online right now
-        for (Player p : getServer().getOnlinePlayers()) {
-            registerPlayer(p);
-        }
+		// Register everyone online right now
+		for (Player p : getServer().getOnlinePlayers()) {
+			registerPlayer(p);
+		}
 
-        // How are you gentlemen
-        getLogger().info("Enabled successfully, " + getServer().getOnlinePlayers().length + " players registered");
+		// How are you gentlemen
+		getLogger().info("Enabled successfully, " + getServer().getOnlinePlayers().length + " players registered");
 	}
 
-    @Override
-    public FileConfiguration getConfig() {
-        return YamlConfig;
-    }
+	@Override
+	public FileConfiguration getConfig() {
+		return YamlConfig;
+	}
 
-    @Override
-    public void reloadConfig() {
-    	YamlConfig = new YamlConfiguration();
-    	YamlConfig.options().pathSeparator('/');
-        try {
-        	YamlConfig.load(configFile);
-        } catch (Exception e) {
-            getLogger().severe("Unable to load configuration!");
-        }
+	@Override
+	public void reloadConfig() {
+		YamlConfig = new YamlConfiguration();
+		YamlConfig.options().pathSeparator('/');
+		try {
+			YamlConfig.load(configFile);
+		} catch (Exception e) {
+			getLogger().severe("Unable to load configuration!");
+		}
 
 		// Init DB
 		initDatabase();
-    }
-	
+	}
+
 	@Override
 	public void onDisable() {
-        // Unregister everyone
-        for (Player p : getServer().getOnlinePlayers()) {
-            unregisterPlayer(p);
-        }
+		// Unregister everyone
+		for (Player p : getServer().getOnlinePlayers()) {
+			unregisterPlayer(p);
+		}
 
-        // Good day to you! I said good day!
-        getLogger().info("Disabled successfully, " + getServer().getOnlinePlayers().length + " players unregistered");
+		// Good day to you! I said good day!
+		getLogger().info("Disabled successfully, " + getServer().getOnlinePlayers().length + " players unregistered");
 	}
 
 	private void initDatabase() {
@@ -118,172 +118,172 @@ public class SimplyPlugin extends JavaPlugin {
 		return new SimplyAPI(this);
 	}
 
-    // -- Plugin stuff
-	
-    protected void registerPlayer(Player player) {
-        if (permissions.containsKey(player.getName())) {
-            debug("Registering " + player.getName() + ": was already registered");
-            unregisterPlayer(player);
-        }
-        PermissionAttachment attachment = player.addAttachment(this);
-        permissions.put(player.getName(), attachment);
-        calculateAttachment(player);
-    }
+	// -- Plugin stuff
 
-    protected void unregisterPlayer(Player player) {
-        if (permissions.containsKey(player.getName())) {
-            try {
-                player.removeAttachment(permissions.get(player.getName()));
-            }
-            catch (IllegalArgumentException ex) {
-                debug("Unregistering " + player.getName() + ": player did not have attachment");
-            }
-            permissions.remove(player.getName());
-        } else {
-            debug("Unregistering " + player.getName() + ": was not registered");
-        }
-    }
+	protected void registerPlayer(Player player) {
+		if (permissions.containsKey(player.getName())) {
+			debug("Registering " + player.getName() + ": was already registered");
+			unregisterPlayer(player);
+		}
+		PermissionAttachment attachment = player.addAttachment(this);
+		permissions.put(player.getName(), attachment);
+		calculateAttachment(player);
+	}
 
-    protected void refreshPermissions() {
-        try {
-            getConfig().save(configFile);
-            reloadConfig();
-        } catch (IOException e) {
-            getLogger().warning("Failed to write changed config.yml: " + e.getMessage());
-        }
-        for (String player : permissions.keySet()) {
-            PermissionAttachment attachment = permissions.get(player);
-            for (String key : attachment.getPermissions().keySet()) {
-                attachment.unsetPermission(key);
-            }
+	protected void unregisterPlayer(Player player) {
+		if (permissions.containsKey(player.getName())) {
+			try {
+				player.removeAttachment(permissions.get(player.getName()));
+			}
+			catch (IllegalArgumentException ex) {
+				debug("Unregistering " + player.getName() + ": player did not have attachment");
+			}
+			permissions.remove(player.getName());
+		} else {
+			debug("Unregistering " + player.getName() + ": was not registered");
+		}
+	}
 
-            calculateAttachment(getServer().getPlayer(player));
-        }
-    }
-	
-    public ConfigurationSection getNode(String node) {
-        for (String entry : getConfig().getKeys(true)) {
-            if (node.equalsIgnoreCase(entry) && getConfig().isConfigurationSection(entry)) {
-                return getConfig().getConfigurationSection(entry);
-            }
-        }
-        return null;
-    }
-    
-    protected HashMap<String, Boolean> getAllPerms(String desc, String path) {
-        HashMap<String, Boolean> result = new HashMap<String, Boolean>();
-        ConfigurationSection node = getNode(path);
-        
-        int failures = 0;
-        String firstFailure = "";
-        
-        Set<String> keys = node.getKeys(false);
-        for (String key : keys) {
-            if (node.isBoolean(key)) {
-                result.put(key, node.getBoolean(key));
-            } else {
-                ++failures;
-                if (firstFailure.length() == 0) {
-                    firstFailure = key;
-                }
-            }
-        }
-        
-        if (failures == 1) {
-            getLogger().warning("In " + desc + ": " + firstFailure + " is non-boolean.");
-        } else if (failures > 1) {
-            getLogger().warning("In " + desc + ": " + firstFailure + " is non-boolean (+" + (failures-1) + " more).");
-        }
-        
-        return result;
-    }
-    
+	protected void refreshPermissions() {
+		try {
+			getConfig().save(configFile);
+			reloadConfig();
+		} catch (IOException e) {
+			getLogger().warning("Failed to write changed config.yml: " + e.getMessage());
+		}
+		for (String player : permissions.keySet()) {
+			PermissionAttachment attachment = permissions.get(player);
+			for (String key : attachment.getPermissions().keySet()) {
+				attachment.unsetPermission(key);
+			}
+
+			calculateAttachment(getServer().getPlayer(player));
+		}
+	}
+
+	public ConfigurationSection getNode(String node) {
+		for (String entry : getConfig().getKeys(true)) {
+			if (node.equalsIgnoreCase(entry) && getConfig().isConfigurationSection(entry)) {
+				return getConfig().getConfigurationSection(entry);
+			}
+		}
+		return null;
+	}
+
+	protected HashMap<String, Boolean> getAllPerms(String desc, String path) {
+		HashMap<String, Boolean> result = new HashMap<String, Boolean>();
+		ConfigurationSection node = getNode(path);
+
+		int failures = 0;
+		String firstFailure = "";
+
+		Set<String> keys = node.getKeys(false);
+		for (String key : keys) {
+			if (node.isBoolean(key)) {
+				result.put(key, node.getBoolean(key));
+			} else {
+				++failures;
+				if (firstFailure.length() == 0) {
+					firstFailure = key;
+				}
+			}
+		}
+
+		if (failures == 1) {
+			getLogger().warning("In " + desc + ": " + firstFailure + " is non-boolean.");
+		} else if (failures > 1) {
+			getLogger().warning("In " + desc + ": " + firstFailure + " is non-boolean (+" + (failures-1) + " more).");
+		}
+
+		return result;
+	}
+
 	public void debug(String message) {
 		if (getConfig().getBoolean("debug", false)) {
 			getLogger().info("Debug: " + message);
 		}
 	}
-    
-    protected void calculateAttachment(Player player) {
-        if (player == null) {
-            return;
-        }
-        PermissionAttachment attachment = permissions.get(player.getName());
-        if (attachment == null) {
-            debug("Calculating permissions on " + player.getName() + ": attachment was null");
-            return;
-        }
-        
-        for (String key : attachment.getPermissions().keySet()) {
-            attachment.unsetPermission(key);
-        }
 
-        for (Map.Entry<String, Boolean> entry : calculatePlayerPermissions(player.getName().toLowerCase(), player.getWorld().getName()).entrySet()) {
-            attachment.setPermission(entry.getKey(), entry.getValue());
-        }
+	protected void calculateAttachment(Player player) {
+		if (player == null) {
+			return;
+		}
+		PermissionAttachment attachment = permissions.get(player.getName());
+		if (attachment == null) {
+			debug("Calculating permissions on " + player.getName() + ": attachment was null");
+			return;
+		}
 
-        player.recalculatePermissions();
-    }
+		for (String key : attachment.getPermissions().keySet()) {
+			attachment.unsetPermission(key);
+		}
 
-    // -- Private stuff
-    
-    private Map<String, Boolean> calculatePlayerPermissions(String player, String world) {
-    	String default_group = getConfig().getString("default", "default");
-        if (!config.isPlayerInDB(player)) {
-            return calculateGroupPermissions(default_group, world);
-        }
+		for (Map.Entry<String, Boolean> entry : calculatePlayerPermissions(player.getName().toLowerCase(), player.getWorld().getName()).entrySet()) {
+			attachment.setPermission(entry.getKey(), entry.getValue());
+		}
 
-        Map<String, Boolean> perms = new HashMap<String, Boolean>();
-        List<String> groups = config.getPlayerGroups(player);
-        if (groups.isEmpty()) groups.add(default_group);
-        
-        for (Entry<String, Boolean> entry : config.getPlayerPermissions(player).entrySet()) {
-        	perms.put(entry.getKey(), entry.getValue());
-        }
+		player.recalculatePermissions();
+	}
 
-        for (Entry<String, Boolean> entry : config.getPlayerPermissions(player, world).entrySet()) {
-            // No containskey; world overrides non-world
-            perms.put(entry.getKey(), entry.getValue());
-        }
+	// -- Private stuff
 
-        for (String group : groups) {
-            for (Map.Entry<String, Boolean> entry : calculateGroupPermissions(group, world).entrySet()) {
-                if (!perms.containsKey(entry.getKey())) { // User overrides group
-                    perms.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
+	private Map<String, Boolean> calculatePlayerPermissions(String player, String world) {
+		String default_group = getConfig().getString("default", "default");
+		if (!config.isPlayerInDB(player)) {
+			return calculateGroupPermissions(default_group, world);
+		}
 
-        return perms;
-    }
+		Map<String, Boolean> perms = new HashMap<String, Boolean>();
+		List<String> groups = config.getPlayerGroups(player);
+		if (groups.isEmpty()) groups.add(default_group);
 
-    private Map<String, Boolean> calculateGroupPermissions(String group, String world) {
-        if (getNode("groups/" + group) == null) {
-            return new HashMap<String, Boolean>();
-        }
+		for (Entry<String, Boolean> entry : config.getPlayerPermissions(player).entrySet()) {
+			perms.put(entry.getKey(), entry.getValue());
+		}
 
-        Map<String, Boolean> perms = getNode("groups/" + group + "/permissions") == null ?
-                new HashMap<String, Boolean>() :
-                getAllPerms("group " + group, "groups/" + group + "/permissions");
-        
+		for (Entry<String, Boolean> entry : config.getPlayerPermissions(player, world).entrySet()) {
+			// No containskey; world overrides non-world
+			perms.put(entry.getKey(), entry.getValue());
+		}
 
-        if (getNode("groups/" + group + "/worlds/" + world) != null) {
-            for (Map.Entry<String, Boolean> entry : getAllPerms("group " + group, "groups/" + group + "/worlds/" + world).entrySet()) {
-                // No containskey; world overrides non-world
-                perms.put(entry.getKey(), entry.getValue());
-            }
-        }
+		for (String group : groups) {
+			for (Map.Entry<String, Boolean> entry : calculateGroupPermissions(group, world).entrySet()) {
+				if (!perms.containsKey(entry.getKey())) { // User overrides group
+					perms.put(entry.getKey(), entry.getValue());
+				}
+			}
+		}
 
-        for (String parent : getNode("groups/" + group).getStringList("inheritance")) {
-            for (Map.Entry<String, Boolean> entry : calculateGroupPermissions(parent, world).entrySet()) {
-                if (!perms.containsKey(entry.getKey())) { // Children override permissions
-                    perms.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
+		return perms;
+	}
 
-        return perms;
-    }
+	private Map<String, Boolean> calculateGroupPermissions(String group, String world) {
+		if (getNode("groups/" + group) == null) {
+			return new HashMap<String, Boolean>();
+		}
+
+		Map<String, Boolean> perms = getNode("groups/" + group + "/permissions") == null ?
+				new HashMap<String, Boolean>() :
+				getAllPerms("group " + group, "groups/" + group + "/permissions");
+
+
+		if (getNode("groups/" + group + "/worlds/" + world) != null) {
+			for (Map.Entry<String, Boolean> entry : getAllPerms("group " + group, "groups/" + group + "/worlds/" + world).entrySet()) {
+				// No containskey; world overrides non-world
+				perms.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		for (String parent : getNode("groups/" + group).getStringList("inheritance")) {
+			for (Map.Entry<String, Boolean> entry : calculateGroupPermissions(parent, world).entrySet()) {
+				if (!perms.containsKey(entry.getKey())) { // Children override permissions
+					perms.put(entry.getKey(), entry.getValue());
+				}
+			}
+		}
+
+		return perms;
+	}
 
 	private void registerEvents() {
 		String path = getDescription().getMain().substring(0, getDescription().getMain().lastIndexOf('.'));
@@ -294,6 +294,6 @@ public class SimplyPlugin extends JavaPlugin {
 				debug(e.getMessage());
 			}
 		}
-    }
+	}
 
 }

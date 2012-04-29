@@ -17,5 +17,5 @@ public class Pickup extends SimplyPrevents {
 	public void pickup(PlayerPickupItemEvent event) {
 		prevent(event, event.getPlayer(), "pickup." + event.getItem().getItemStack().getTypeId() + ",loot." + event.getItem().getItemStack().getTypeId());
 	}
-	
+
 }

@@ -25,5 +25,5 @@ public class Noteblock extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

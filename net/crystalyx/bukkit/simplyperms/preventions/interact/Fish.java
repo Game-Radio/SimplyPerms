@@ -17,5 +17,5 @@ public class Fish extends SimplyPrevents {
 	public void fish(PlayerFishEvent event) {
 		prevent(event, event.getPlayer(), "fish,interact");
 	}
-	
+
 }

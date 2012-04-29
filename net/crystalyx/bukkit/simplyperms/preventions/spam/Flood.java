@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerChatEvent;
 public class Flood extends SimplyPrevents {
 
 	private HashMap<Player, Long> chatTimestamps = new HashMap<Player, Long>();
-	
+
 	public Flood(SimplyPlugin plugin) {
 		super(plugin);
 	}

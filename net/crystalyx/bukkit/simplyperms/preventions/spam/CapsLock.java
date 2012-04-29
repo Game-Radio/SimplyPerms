@@ -20,11 +20,11 @@ public class CapsLock extends SimplyPrevents {
 		for (Player player : super.plugin.getServer().getOnlinePlayers()) {
 			message.replace(player.getName(), "");
 		}
-		String nocaps = message.replaceAll("[A-Z]*", "");	
+		String nocaps = message.replaceAll("[A-Z]*", "");
 		if (message.length() > 5
 				&& message.length() - nocaps.length() > message.length() / 2) {
 			prevent(event, event.getPlayer(), "capslock,spam");
 		}
 	}
-	
+
 }

@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 
 public class Shear extends SimplyPrevents {
-	
+
 	public Shear(SimplyPlugin plugin) {
 		super(plugin);
 	}
@@ -17,5 +17,5 @@ public class Shear extends SimplyPrevents {
 	public void shear(PlayerShearEntityEvent event) {
 		prevent(event, event.getPlayer(), "shear,animals,interact");
 	}
-	
+
 }

@@ -66,5 +66,5 @@ public class Vehicle extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

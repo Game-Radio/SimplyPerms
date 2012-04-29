@@ -20,5 +20,5 @@ public class Milking extends SimplyPrevents {
 			prevent(event, event.getPlayer(), "milking,bucket,interact");
 		}
 	}
-	
+
 }

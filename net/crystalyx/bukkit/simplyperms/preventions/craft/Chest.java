@@ -11,7 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Chest extends SimplyPrevents {
-	
+
 	public Chest(SimplyPlugin plugin) {
 		super(plugin);
 	}

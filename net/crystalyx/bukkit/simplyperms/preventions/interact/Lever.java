@@ -25,5 +25,5 @@ public class Lever extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

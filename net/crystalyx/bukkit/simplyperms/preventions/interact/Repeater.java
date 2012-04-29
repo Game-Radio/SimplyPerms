@@ -25,5 +25,5 @@ public class Repeater extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

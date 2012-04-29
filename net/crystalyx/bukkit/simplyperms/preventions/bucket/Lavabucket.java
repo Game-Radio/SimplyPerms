@@ -28,5 +28,5 @@ public class Lavabucket extends SimplyPrevents {
 			prevent(event, event.getPlayer(), "lavabucket,bucket,interact");
 		}
 	}
-	
+
 }

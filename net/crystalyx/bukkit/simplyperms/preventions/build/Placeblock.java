@@ -24,5 +24,5 @@ public class Placeblock extends SimplyPrevents {
 	public void paintingPlaceblock(PaintingPlaceEvent event) {
 		prevent(event, event.getPlayer(), "placeblock." + Material.PAINTING.getId() + ",build." + Material.PAINTING.getId());
 	}
-	
+
 }

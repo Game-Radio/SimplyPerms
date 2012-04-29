@@ -24,5 +24,5 @@ public class Snowball extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

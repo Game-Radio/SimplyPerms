@@ -22,5 +22,5 @@ public class Hunger extends SimplyPrevents {
 			prevent(event, (Player) entity, "hunger");
 		}
 	}
-	
+
 }

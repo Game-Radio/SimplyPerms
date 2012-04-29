@@ -18,31 +18,31 @@ public class ImportFile extends SimplyAPI implements ImportManager {
 
 	@Override
 	public void run() throws Exception {
-    	try {
-    		ConfigFile importFile = new ConfigFile(plugin);
-    		ConfigSQL importSQL = new ConfigSQL(plugin);
-    		if (!importSQL.checkDatabase()) {
-    			throw new Exception("Could not connect to database !");
-    		}
+		try {
+			ConfigFile importFile = new ConfigFile(plugin);
+			ConfigSQL importSQL = new ConfigSQL(plugin);
+			if (!importSQL.checkDatabase()) {
+				throw new Exception("Could not connect to database !");
+			}
 
-	    	for (String player : importFile.getAllPlayers()) {
-		    	for (String group : importFile.getPlayerGroups(player)) {
-		    		importSQL.addPlayerGroup(player, group);
-		    	}
+			for (String player : importFile.getAllPlayers()) {
+				for (String group : importFile.getPlayerGroups(player)) {
+					importSQL.addPlayerGroup(player, group);
+				}
 
-		    	for (Entry<String, Boolean> permission : importFile.getPlayerPermissions(player).entrySet()) {
-		    		importSQL.addPlayerPermission(player, permission.getKey(), permission.getValue());
-		    	}
+				for (Entry<String, Boolean> permission : importFile.getPlayerPermissions(player).entrySet()) {
+					importSQL.addPlayerPermission(player, permission.getKey(), permission.getValue());
+				}
 
-		    	for (String world : importFile.getPlayerWorlds(player)) {
-			    	for (Entry<String, Boolean> permission : importFile.getPlayerPermissions(player, world).entrySet()) {
-			    		importSQL.addPlayerPermission(player, world, permission.getKey(), permission.getValue());
-			    	}
-		    	}
-	    	}
-    	} catch (Exception e) {
-    		throw e;
-    	}
+				for (String world : importFile.getPlayerWorlds(player)) {
+					for (Entry<String, Boolean> permission : importFile.getPlayerPermissions(player, world).entrySet()) {
+						importSQL.addPlayerPermission(player, world, permission.getKey(), permission.getValue());
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

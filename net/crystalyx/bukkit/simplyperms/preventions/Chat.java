@@ -19,5 +19,5 @@ public class Chat extends SimplyPrevents {
 			prevent(event, event.getPlayer(), "chat");
 		}
 	}
-	
+
 }

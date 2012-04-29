@@ -27,5 +27,5 @@ public class Command extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

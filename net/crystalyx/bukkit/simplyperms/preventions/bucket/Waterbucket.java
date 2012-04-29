@@ -28,5 +28,5 @@ public class Waterbucket extends SimplyPrevents {
 			prevent(event, event.getPlayer(), "waterbucket,bucket,interact");
 		}
 	}
-	
+
 }

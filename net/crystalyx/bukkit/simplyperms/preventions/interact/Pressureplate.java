@@ -25,5 +25,5 @@ public class Pressureplate extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

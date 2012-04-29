@@ -22,7 +22,7 @@ public class ImportPermBukkit extends SimplyAPI implements ImportManager {
 	@Override
 	public void run() throws Exception {
 		try {
-	    	permBukkit.load("plugins/PermissionsBukkit/config.yml");
+			permBukkit.load("plugins/PermissionsBukkit/config.yml");
 			plugin.getConfig().set("debug", permBukkit.getBoolean("debug"));
 			addMessage("build", permBukkit.getString("messages/build"));
 
@@ -30,7 +30,7 @@ public class ImportPermBukkit extends SimplyAPI implements ImportManager {
 				for (String group : permBukkit.getStringList("users/" + player + "/groups")) {
 					addPlayerGroup(player, group);
 				} 
-				
+
 				for (Entry<String, Object> perm : permBukkit.getConfigurationSection("users/" + player + "/permissions").getValues(false).entrySet()) {
 					addPlayerPermission(player, perm.getKey(), (Boolean) perm.getValue());
 				}

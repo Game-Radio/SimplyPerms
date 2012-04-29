@@ -23,5 +23,5 @@ public class Jukebox extends SimplyPrevents {
 			}
 		}
 	}
-	
+
 }

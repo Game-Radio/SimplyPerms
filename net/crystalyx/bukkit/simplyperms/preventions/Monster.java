@@ -22,5 +22,5 @@ public class Monster extends SimplyPrevents {
 			prevent(event, (Player) target, "monster");
 		}
 	}
-	
+
 }

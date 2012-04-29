@@ -14,7 +14,7 @@ public interface PermsConfig {
 	public void addPlayerGroup(String player, String group);
 
 	public void addPlayerPermission(String player, String permission, boolean value);
-	
+
 	public void addPlayerPermission(String player, String world, String permission, boolean value);
 
 	public void removePlayerPermissions(String player);
@@ -34,7 +34,7 @@ public interface PermsConfig {
 	public boolean isPlayerInDB(String player);
 
 	public List<String> getPlayerWorlds(String player);
-	
+
 	public List<String> getAllPlayers();
-	
+
 }

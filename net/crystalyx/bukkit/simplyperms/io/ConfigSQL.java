@@ -24,7 +24,7 @@ public class ConfigSQL implements PermsConfig {
 	private String column_world;
 	private String column_value;
 	private String column_date;
-	
+
 	public ConfigSQL(SimplyPlugin plugin) {
 		this.plugin = plugin;
 		table_players = plugin.getConfig().getString("db/table/players");
@@ -55,7 +55,7 @@ public class ConfigSQL implements PermsConfig {
 			return false;
 		}
 	}
-	
+
 	public boolean checkDatabase() {
 		if (init()) {
 			String date = (!column_date.isEmpty()) ? column_date + " DATETIME," : "";
@@ -77,7 +77,7 @@ public class ConfigSQL implements PermsConfig {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void removePlayer(String player) {
 		removePlayerPermissions(player);
@@ -126,10 +126,10 @@ public class ConfigSQL implements PermsConfig {
 				else {
 					plugin.debug(e.getMessage());
 				}
-			}	
+			}
 		}
 	}
-	
+
 	@Override
 	public void addPlayerGroup(String player, String group) {
 		addPlayerGroup(player, group, true);
@@ -152,7 +152,7 @@ public class ConfigSQL implements PermsConfig {
 				else {
 					plugin.debug(e.getMessage());
 				}
-			}	
+			}
 		}
 	}
 
@@ -175,7 +175,7 @@ public class ConfigSQL implements PermsConfig {
 				sql.executeUpdate();
 			} catch (SQLException e) {
 				plugin.debug(e.getMessage());
-			}	
+			}
 		}
 	}
 
@@ -195,7 +195,7 @@ public class ConfigSQL implements PermsConfig {
 				sql.executeUpdate();
 			} catch (SQLException e) {
 				plugin.debug(e.getMessage());
-			}	
+			}
 		}
 	}
 
@@ -280,7 +280,7 @@ public class ConfigSQL implements PermsConfig {
 			} catch (SQLException e) {
 				plugin.debug(e.getMessage());
 				return false;
-			}	
+			}
 		}
 		return false;
 	}

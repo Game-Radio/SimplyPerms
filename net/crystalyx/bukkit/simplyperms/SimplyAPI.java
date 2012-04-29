@@ -135,7 +135,7 @@ public class SimplyAPI implements PermsConfig {
 		inheritances.remove(inherit);
 		plugin.getConfig().set("groups/" + group + "/inheritance", inheritances);
 	}
-	
+
 	public void removeGroupInheritances(String group) {
 		if (group.isEmpty()) group = getDefaultGroup();
 		plugin.getConfig().set("groups/" + group + "/inheritance", null);
