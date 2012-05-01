@@ -60,7 +60,9 @@ permissions:
       permissions.group.list: true
       permissions.group.players: true
       permissions.group.setperm: true
+      permissions.group.setperm.*: true
       permissions.group.unsetperm: true
+      permissions.group.unsetperm.*: true
   permissions.group.help:
     description: Allows viewing of usage for /permissions group.
   permissions.group.list:
@@ -69,32 +71,53 @@ permissions:
     description: Allows use of /permissions group players.
   permissions.group.setperm:
     description: Allows use of /permissions group setperm.
+  permissions.group.setperm.*:
+    description: Allows set all permissions node for this group.
   permissions.group.unsetperm:
     description: Allows use of /permissions group unsetperm.
+  permissions.group.unsetperm.*:
+    description: Allows unset all permissions node for this group.
   permissions.player.*:
     description: Allows use of all /permissions player commands.
     children:
       permissions.player.help: true
       permissions.player.groups: true
       permissions.player.setgroup: true
+      permissions.player.setgroup.*: true
       permissions.player.addgroup: true
+      permissions.player.addgroup.*: true
       permissions.player.removegroup: true
+      permissions.player.removegroup.*: true
       permissions.player.remove: true
       permissions.player.setperm: true
+      permissions.player.setperm.*: true
       permissions.player.unsetperm: true
+      permissions.player.unsetperm.*: true
   permissions.player.help:
     description: Allows viewing of usage for /permissions player.
   permissions.player.groups:
     description: Allows use of /permissions player groups.
   permissions.player.setgroup:
     description: Allows use of /permissions player setgroup.
+  permissions.player.setgroup.*:
+    description: Allows set all groups for this player.
   permissions.player.addgroup:
     description: Allows use of /permissions player addgroup.
+  permissions.player.addgroup.*:
+    description: Allows add all groups for this player.
   permissions.player.removegroup:
     description: Allows use of /permissions player removegroup.
+  permissions.player.removegroup.*:
+    description: Allows remove all groups for this player.
   permissions.player.remove:
     description: Allows use of /permissions player remove.
   permissions.player.setperm:
     description: Allows use of /permissions player setperm.
+  permissions.player.setperm.*:
+    description: Allows set all permissions node for this player.
   permissions.player.unsetperm:
     description: Allows use of /permissions player unsetperm.
+  permissions.player.unsetperm.*:
+    description: Allows unset all permissions node for this player.
+  permissions.allow.*:
+    description: Allows player to do everything.
