@@ -90,7 +90,7 @@ public class ConfigSQL implements PermsConfig {
 	public void removePlayerGroups(String player) {
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_groups + " WHERE " + column_playerid + " = ?");
+				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_groups + " WHERE " + column_playerid + " = LOWER(?)");
 				sql.setString(1, player);
 				sql.executeUpdate();
 			} catch (SQLException e) {
@@ -103,7 +103,7 @@ public class ConfigSQL implements PermsConfig {
 	public void removePlayerGroup(String player, String group) {
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_groups + " WHERE " + column_playerid + " = ? AND " + column_groupname + " = ?");
+				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_groups + " WHERE " + column_playerid + " = LOWER(?) AND " + column_groupname + " = ?");
 				sql.setString(1, player);
 				sql.setString(2, group);
 				sql.executeUpdate();
@@ -172,7 +172,7 @@ public class ConfigSQL implements PermsConfig {
 	public void removePlayerPermissions(String player) {
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_players + " WHERE " + column_playerid + " = ?");
+				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_players + " WHERE " + column_playerid + " = LOWER(?)");
 				sql.setString(1, player);
 				sql.executeUpdate();
 			} catch (SQLException e) {
@@ -190,7 +190,7 @@ public class ConfigSQL implements PermsConfig {
 	public void removePlayerPermission(String player, String world, String permission) {
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_players + " WHERE " + column_playerid + " = ? AND " + column_world + " = ? AND " + column_permission + " = ?");
+				PreparedStatement sql = connection.prepareStatement("DELETE FROM " + table_players + " WHERE " + column_playerid + " = LOWER(?) AND " + column_world + " = ? AND " + column_permission + " = ?");
 				sql.setString(1, player);
 				sql.setString(2, world);
 				sql.setString(3, permission);
@@ -224,7 +224,7 @@ public class ConfigSQL implements PermsConfig {
 		List<String> results = new ArrayList<String>();
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("SELECT " + column_groupname + " FROM " + table_groups + " WHERE " + column_playerid + " = ?");
+				PreparedStatement sql = connection.prepareStatement("SELECT " + column_groupname + " FROM " + table_groups + " WHERE " + column_playerid + " = LOWER(?)");
 				sql.setString(1, player);
 				ResultSet players = sql.executeQuery();
 				while (players.next()) {
@@ -247,7 +247,7 @@ public class ConfigSQL implements PermsConfig {
 		Map<String, Boolean> results = new HashMap<String, Boolean>();
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("SELECT " + column_permission + ", " + column_value + " FROM " + table_players + " WHERE " + column_playerid + " = ? AND " + column_world + " = ?");
+				PreparedStatement sql = connection.prepareStatement("SELECT " + column_permission + ", " + column_value + " FROM " + table_players + " WHERE " + column_playerid + " = LOWER(?) AND " + column_world + " = ?");
 				sql.setString(1, player);
 				sql.setString(2, world);
 				ResultSet permissions = sql.executeQuery();
@@ -266,13 +266,13 @@ public class ConfigSQL implements PermsConfig {
 		if (init()) {
 			try {
 				int count = 0;
-				PreparedStatement sql = connection.prepareStatement("SELECT COUNT(" + column_playerid + ") FROM " + table_groups + " WHERE " + column_playerid + " = ?");
+				PreparedStatement sql = connection.prepareStatement("SELECT COUNT(" + column_playerid + ") FROM " + table_groups + " WHERE " + column_playerid + " = LOWER(?)");
 				sql.setString(1, player);
 				ResultSet results = sql.executeQuery();
 				if (results.next()) {
 					count += results.getInt(1);
 				}
-				sql = connection.prepareStatement("SELECT COUNT(" + column_playerid + ") FROM " + table_players + " WHERE " + column_playerid + " = ?");
+				sql = connection.prepareStatement("SELECT COUNT(" + column_playerid + ") FROM " + table_players + " WHERE " + column_playerid + " = LOWER(?)");
 				sql.setString(1, player);
 				results = sql.executeQuery();
 				if (results.next()) {
@@ -292,7 +292,7 @@ public class ConfigSQL implements PermsConfig {
 		List<String> results = new ArrayList<String>();
 		if (init()) {
 			try {
-				PreparedStatement sql = connection.prepareStatement("SELECT " + column_world + " FROM " + table_players + " WHERE " + column_playerid + " = ?");
+				PreparedStatement sql = connection.prepareStatement("SELECT " + column_world + " FROM " + table_players + " WHERE " + column_playerid + " = LOWER(?)");
 				sql.setString(1, player);
 				ResultSet players = sql.executeQuery();
 				while (players.next()) {
