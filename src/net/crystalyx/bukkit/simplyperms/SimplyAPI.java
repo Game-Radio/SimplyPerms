@@ -1,12 +1,7 @@
 package net.crystalyx.bukkit.simplyperms;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import net.crystalyx.bukkit.simplyperms.io.PermsConfig;
 
@@ -98,148 +93,103 @@ public class SimplyAPI implements PermsConfig {
 		return plugin.config.getAllPlayers();
 	}
 
+	@Override
 	public List<String> getAllGroups() {
-		if (plugin.getNode("groups") != null) {
-			return new ArrayList<String>(plugin.getNode("groups").getKeys(false));
-		}
-		else {
-			return new ArrayList<String>();
-		}
+		return plugin.config.getAllGroups();
 	}
 
+	@Override
 	public List<String> getGroupWorlds(String group) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		if (plugin.getNode("groups/" + group + "/worlds") != null) {
-			return new ArrayList<String>(plugin.getNode("groups/" + group + "/worlds").getKeys(false));
-		}
-		else {
-			return new ArrayList<String>();
-		}
+		return plugin.config.getGroupWorlds(group);
 	}
 
+	@Override
 	public List<String> getGroupInheritance(String group) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		return plugin.getConfig().getStringList("groups/" + group + "/inheritance");
+		return plugin.config.getGroupInheritance(group);
 	}
 
+	@Override
 	public void addGroupInheritance(String group, String inherit) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		List<String> inheritances = getGroupInheritance(group);
-		if (!inheritances.contains(inherit)) inheritances.add(inherit);
-		plugin.getConfig().set("groups/" + group + "/inheritance", inheritances);
+		plugin.config.addGroupInheritance(group, inherit);
 	}
 
+	@Override
 	public void removeGroupInheritance(String group, String inherit) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		List<String> inheritances = getGroupInheritance(group);
-		inheritances.remove(inherit);
-		plugin.getConfig().set("groups/" + group + "/inheritance", inheritances);
+		plugin.config.removeGroupInheritance(group, inherit);
 	}
 
+	@Override
 	public void removeGroupInheritances(String group) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		plugin.getConfig().set("groups/" + group + "/inheritance", null);
+		plugin.config.removeGroupInheritances(group);
 	}
 
+	@Override
 	public Map<String, Boolean> getGroupPermissions(String group, String world) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		Map<String, Boolean> finalPerms = new HashMap<String, Boolean>();
-		String permNode = (!world.isEmpty()) ? "groups/" + group + "/worlds/" + world : "groups/" + group + "/permissions";
-		if (plugin.getNode(permNode) != null) {
-			for (Entry<String, Object> permGroup : plugin.getNode(permNode).getValues(false).entrySet()) {
-				finalPerms.put(permGroup.getKey(), (Boolean) permGroup.getValue());
-			}
-		}
-		return finalPerms;
+		return plugin.config.getGroupPermissions(group, world);
 	}
 
+	@Override
 	public Map<String, Boolean> getGroupPermissions(String group) {
-		return getGroupPermissions(group, "");
+		return plugin.config.getGroupPermissions(group);
 	}
 
+	@Override
 	public void addGroupPermission(String group, String world, String permission, boolean value) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		Map<String, Boolean> permissions = getGroupPermissions(group, world);
-		if (permissions.containsKey(permission)) permissions.remove(permission);
-		permissions.put(permission, value);
-		if (!world.isEmpty()) {
-			plugin.getConfig().set("groups/" + group + "/worlds/" + world, permissions);
-		}
-		else {
-			plugin.getConfig().set("groups/" + group + "/permissions", permissions);
-		}
+		plugin.config.addGroupPermission(group, world, permission, value);
 	}
 
+	@Override
 	public void addGroupPermission(String group, String permission, boolean value) {
-		addGroupPermission(group, "", permission, value);
+		plugin.config.addGroupPermission(group, permission, value);
 	}
 
+	@Override
 	public void removeGroupPermission(String group, String world, String permission) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		Map<String, Boolean> permissions = getGroupPermissions(group, world);
-		permissions.remove(permission);
-		if (!world.isEmpty()) {
-			plugin.getConfig().set("groups/" + group + "/worlds/" + world, (permissions.isEmpty()) ? null : permissions);
-		}
-		else {
-			plugin.getConfig().set("groups/" + group + "/permissions", (permissions.isEmpty()) ? null : permissions);
-		}
+		plugin.config.removeGroupPermission(group, world, permission);
 	}
 
+	@Override
 	public void removeGroupPermission(String group, String permission) {
-		removeGroupPermission(group, "", permission);
+		plugin.config.removeGroupPermission(group, permission);
 	}
 
+	@Override
 	public void removeGroupPermissions(String group) {
-		if (group.isEmpty()) group = getDefaultGroup();
-		plugin.getConfig().set("groups/" + group + "/permissions", null);
+		plugin.config.removeGroupPermissions(group);
 	}
 
+	@Override
 	public void removeGroup(String group) {
-		plugin.getConfig().set("groups/" + group, null);
+		plugin.config.removeGroup(group);
 	}
 
+	@Override
 	public Map<String, Object> getMessages() {
-		if (plugin.getNode("messages") != null) {
-			return plugin.getNode("messages").getValues(false);
-		}
-		else {
-			return new HashMap<String, Object>();
-		}
+		return plugin.config.getMessages();
 	}
 
+	@Override
 	public void addMessage(String key, String message) {
-		Map<String, Object> messages = getMessages();
-		if (!messages.containsKey(key)) messages.put(key, message);
-		plugin.getConfig().set("messages", messages);
+		plugin.config.addMessage(key, message);
 	}
 
+	@Override
 	public void removeMessage(String key) {
-		Map<String, Object> messages = getMessages();
-		messages.remove(key);
-		plugin.getConfig().set("messages", messages);
+		plugin.config.removeMessage(key);
 	}
 
+	@Override
 	public String getDefaultGroup() {
-		return plugin.getConfig().getString("default", "default");
+		return plugin.config.getDefaultGroup();
 	}
 
+	@Override
 	public void setDefaultGroup(String group) {
-		if (group.isEmpty()) group = "default";
-		plugin.getConfig().set("default", group);
+		plugin.config.setDefaultGroup(group);
 	}
 
 	public void refreshPermissions() {
 		plugin.refreshPermissions();
-	}
-
-	protected List<String> getKeys(YamlConfiguration config, String node) {
-		if (config.isConfigurationSection(node)) {
-			return new ArrayList<String>(config.getConfigurationSection(node).getKeys(false));
-		}
-		else {
-			return new ArrayList<String>();
-		}
 	}
 
 }

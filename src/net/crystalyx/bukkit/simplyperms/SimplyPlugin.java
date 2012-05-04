@@ -2,6 +2,7 @@ package net.crystalyx.bukkit.simplyperms;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,6 +202,15 @@ public class SimplyPlugin extends JavaPlugin {
 	public void debug(String message) {
 		if (getConfig().getBoolean("debug", false)) {
 			getLogger().info("Debug: " + message);
+		}
+	}
+
+	public List<String> getKeys(YamlConfiguration config, String node) {
+		if (config.isConfigurationSection(node)) {
+			return new ArrayList<String>(config.getConfigurationSection(node).getKeys(false));
+		}
+		else {
+			return new ArrayList<String>();
 		}
 	}
 

@@ -15,6 +15,7 @@ import net.crystalyx.bukkit.simplyperms.SimplyPlugin;
 public class ConfigSQL implements PermsConfig {
 
 	private SimplyPlugin plugin;
+	private ConfigFile config;
 	private Connection connection;
 	private String table_players;
 	private String table_groups;
@@ -27,6 +28,7 @@ public class ConfigSQL implements PermsConfig {
 
 	public ConfigSQL(SimplyPlugin plugin) {
 		this.plugin = plugin;
+		config = new ConfigFile(plugin);
 		table_players = plugin.getConfig().getString("db/table/players");
 		table_groups = plugin.getConfig().getString("db/table/groups");
 		column_playerid = plugin.getConfig().getString("db/column/playerid");
@@ -325,6 +327,101 @@ public class ConfigSQL implements PermsConfig {
 			}
 		}
 		return results;
+	}
+
+	@Override
+	public List<String> getAllGroups() {
+		return config.getAllGroups();
+	}
+
+	@Override
+	public List<String> getGroupWorlds(String group) {
+		return config.getGroupWorlds(group);
+	}
+
+	@Override
+	public List<String> getGroupInheritance(String group) {
+		return config.getGroupInheritance(group);
+	}
+
+	@Override
+	public void addGroupInheritance(String group, String inherit) {
+		config.addGroupInheritance(group, inherit);
+	}
+
+	@Override
+	public void removeGroupInheritance(String group, String inherit) {
+		config.removeGroupInheritance(group, inherit);
+	}
+
+	@Override
+	public void removeGroupInheritances(String group) {
+		config.removeGroupInheritances(group);
+	}
+
+	@Override
+	public Map<String, Boolean> getGroupPermissions(String group, String world) {
+		return config.getGroupPermissions(group, world);
+	}
+
+	@Override
+	public Map<String, Boolean> getGroupPermissions(String group) {
+		return config.getGroupPermissions(group);
+	}
+
+	@Override
+	public void addGroupPermission(String group, String world, String permission, boolean value) {
+		config.addGroupPermission(group, world, permission, value);
+	}
+
+	@Override
+	public void addGroupPermission(String group, String permission, boolean value) {
+		config.addGroupPermission(group, permission, value);
+	}
+
+	@Override
+	public void removeGroupPermission(String group, String world, String permission) {
+		config.removeGroupPermission(group, world, permission);
+	}
+
+	@Override
+	public void removeGroupPermission(String group, String permission) {
+		config.removeGroupPermission(group, permission);
+	}
+
+	@Override
+	public void removeGroupPermissions(String group) {
+		config.removeGroupPermissions(group);
+	}
+
+	@Override
+	public void removeGroup(String group) {
+		config.removeGroup(group);
+	}
+
+	@Override
+	public Map<String, Object> getMessages() {
+		return config.getMessages();
+	}
+
+	@Override
+	public void addMessage(String key, String message) {
+		config.addMessage(key, message);
+	}
+
+	@Override
+	public void removeMessage(String key) {
+		config.removeMessage(key);
+	}
+
+	@Override
+	public String getDefaultGroup() {
+		return config.getDefaultGroup();
+	}
+
+	@Override
+	public void setDefaultGroup(String group) {
+		config.setDefaultGroup(group);
 	}
 
 }

@@ -37,4 +37,42 @@ public interface PermsConfig {
 
 	public List<String> getAllPlayers();
 
+	public List<String> getAllGroups();
+
+	public List<String> getGroupWorlds(String group);
+
+	public List<String> getGroupInheritance(String group);
+
+	public void addGroupInheritance(String group, String inherit);
+
+	public void removeGroupInheritance(String group, String inherit);
+
+	public void removeGroupInheritances(String group);
+
+	public Map<String, Boolean> getGroupPermissions(String group, String world);
+
+	public Map<String, Boolean> getGroupPermissions(String group);
+
+	public void addGroupPermission(String group, String world, String permission, boolean value);
+
+	public void addGroupPermission(String group, String permission, boolean value);
+
+	public void removeGroupPermission(String group, String world, String permission);
+
+	public void removeGroupPermission(String group, String permission);
+
+	public void removeGroupPermissions(String group);
+
+	public void removeGroup(String group);
+
+	public Map<String, Object> getMessages();
+
+	public void addMessage(String key, String message);
+
+	public void removeMessage(String key);
+
+	public String getDefaultGroup();
+	
+	public void setDefaultGroup(String group);
+
 }

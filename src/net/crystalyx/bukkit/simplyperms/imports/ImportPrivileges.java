@@ -24,14 +24,14 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 			plugin.getConfig().set("debug", privileges.getBoolean("debug"));
 
 			privileges.load("plugins/Privileges/users.yml");
-			for (String player : getKeys(privileges, "users")) {
+			for (String player : plugin.getKeys(privileges, "users")) {
 				addPlayerGroup(player, privileges.getString("users." + player + ".group"));
 
 				for (String permission : privileges.getStringList("users." + player + ".permissions")) {
 					addPlayerPermission(player, permission.replace("-", ""), !permission.startsWith("-"));
 				}
 
-				for (String world : getKeys(privileges, "users." + player + ".worlds")) {
+				for (String world : plugin.getKeys(privileges, "users." + player + ".worlds")) {
 					for (String worldpermission : privileges.getStringList("users." + player + ".worlds." + world)) {
 						addPlayerPermission(player, world, worldpermission.replace("-", ""), !worldpermission.startsWith("-"));
 					}
@@ -39,12 +39,12 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 			}
 
 			privileges.load("plugins/Privileges/groups.yml");
-			for (String group : getKeys(privileges, "groups")) {
+			for (String group : plugin.getKeys(privileges, "groups")) {
 				for (String permission : privileges.getStringList("groups." + group + ".permissions")) {
 					addGroupPermission(group, permission.replace("-", ""), !permission.startsWith("-"));
 				}
 
-				for (String world : getKeys(privileges, "groups." + group + ".worlds")) {
+				for (String world : plugin.getKeys(privileges, "groups." + group + ".worlds")) {
 					for (String worldpermission : privileges.getStringList("groups." + group + ".worlds." + world)) {
 						addGroupPermission(group, world, worldpermission.replace("-", ""), !worldpermission.startsWith("-"));
 					}
