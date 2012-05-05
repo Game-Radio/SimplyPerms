@@ -21,7 +21,6 @@ public abstract class SimplyPrevents implements Listener {
 		"Item",
 		"Monster",
 		"Sneak",
-		"Vehicle",
 		"animals.Shear",
 		"animals.Tame",
 		"bucket.Lavabucket",
@@ -53,7 +52,11 @@ public abstract class SimplyPrevents implements Listener {
 		"projectile.Potion",
 		"projectile.Snowball",
 		"spam.CapsLock",
-		"spam.Flood"
+		"spam.Flood",
+		"vehicle.Collision",
+		"vehicle.Destroy",
+		"vehicle.Enter",
+		"vehicle.Place"
 	};
 
 	public SimplyPrevents(SimplyPlugin plugin) {
