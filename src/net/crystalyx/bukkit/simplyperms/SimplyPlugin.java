@@ -40,13 +40,6 @@ public class SimplyPlugin extends JavaPlugin {
 			}
 		}
 
-		// Disable others permissions plugin
-		for (String permPlugin : getDescription().getSoftDepend()) {
-			if (getServer().getPluginManager().isPluginEnabled(permPlugin)) {
-				getServer().getPluginManager().disablePlugin(getServer().getPluginManager().getPlugin(permPlugin));
-			}
-		}
-
 		// Take care of configuration
 		configFile = new File(getDataFolder(), "config.yml");
 		if (!configFile.exists()) {
