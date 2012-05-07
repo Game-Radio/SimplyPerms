@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import net.crystalyx.bukkit.simplyperms.io.ConfigFile;
 import net.crystalyx.bukkit.simplyperms.io.ConfigSQL;
@@ -210,15 +209,9 @@ public class SimplyPlugin extends JavaPlugin {
 		Map<String, Boolean> perms = new HashMap<String, Boolean>();
 		List<String> groups = config.getPlayerGroups(player);
 		if (groups.isEmpty()) groups.add(default_group);
-
-		for (Entry<String, Boolean> entry : config.getPlayerPermissions(player).entrySet()) {
-			perms.put(entry.getKey(), entry.getValue());
-		}
-
-		for (Entry<String, Boolean> entry : config.getPlayerPermissions(player, world).entrySet()) {
-			// No containskey; world overrides non-world
-			perms.put(entry.getKey(), entry.getValue());
-		}
+		perms.putAll(config.getPlayerPermissions(player));
+		// No containskey; world overrides non-world
+		perms.putAll(config.getPlayerPermissions(player, world));
 
 		for (String group : groups) {
 			for (Map.Entry<String, Boolean> entry : calculateGroupPermissions(group, world).entrySet()) {
@@ -236,19 +229,11 @@ public class SimplyPlugin extends JavaPlugin {
 			return new HashMap<String, Boolean>();
 		}
 
-		Map<String, Boolean> perms = new HashMap<String, Boolean>();
-		for (String key : getNode("groups/" + group + "/permissions").getKeys(false)) {
-			perms.put(key, getNode("groups/" + group + "/permissions").getBoolean(key));
-		}
+		Map<String, Boolean> perms = config.getGroupPermissions(group);
+		// No containskey; world overrides non-world
+		perms.putAll(config.getGroupPermissions(group, world));
 
-		if (getNode("groups/" + group + "/worlds/" + world) != null) {
-			for (String entry : getNode("groups/" + group + "/worlds/" + world).getKeys(false)) {
-				// No containskey; world overrides non-world
-				perms.put(entry, getNode("groups/" + group + "/worlds/" + world).getBoolean(entry));
-			}
-		}
-
-		for (String parent : getNode("groups/" + group).getStringList("inheritance")) {
+		for (String parent : config.getGroupInheritance(group)) {
 			for (Map.Entry<String, Boolean> entry : calculateGroupPermissions(parent, world).entrySet()) {
 				if (!perms.containsKey(entry.getKey())) { // Children override permissions
 					perms.put(entry.getKey(), entry.getValue());
