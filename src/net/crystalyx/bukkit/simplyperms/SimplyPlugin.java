@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import net.crystalyx.bukkit.simplyperms.io.ConfigFile;
 import net.crystalyx.bukkit.simplyperms.io.ConfigSQL;
@@ -119,6 +118,15 @@ public class SimplyPlugin extends JavaPlugin {
 		return new SimplyAPI(this);
 	}
 
+	public List<String> getKeys(YamlConfiguration config, String node) {
+		if (config.isConfigurationSection(node)) {
+			return new ArrayList<String>(config.getConfigurationSection(node).getKeys(false));
+		}
+		else {
+			return new ArrayList<String>();
+		}
+	}
+
 	// -- Plugin stuff
 
 	protected void registerPlayer(Player player) {
@@ -171,46 +179,9 @@ public class SimplyPlugin extends JavaPlugin {
 		return null;
 	}
 
-	protected HashMap<String, Boolean> getAllPerms(String desc, String path) {
-		HashMap<String, Boolean> result = new HashMap<String, Boolean>();
-		ConfigurationSection node = getNode(path);
-
-		int failures = 0;
-		String firstFailure = "";
-
-		Set<String> keys = node.getKeys(false);
-		for (String key : keys) {
-			if (node.isBoolean(key)) {
-				result.put(key, node.getBoolean(key));
-			} else {
-				++failures;
-				if (firstFailure.length() == 0) {
-					firstFailure = key;
-				}
-			}
-		}
-
-		if (failures == 1) {
-			getLogger().warning("In " + desc + ": " + firstFailure + " is non-boolean.");
-		} else if (failures > 1) {
-			getLogger().warning("In " + desc + ": " + firstFailure + " is non-boolean (+" + (failures-1) + " more).");
-		}
-
-		return result;
-	}
-
 	public void debug(String message) {
 		if (getConfig().getBoolean("debug", false)) {
 			getLogger().info("Debug: " + message);
-		}
-	}
-
-	public List<String> getKeys(YamlConfiguration config, String node) {
-		if (config.isConfigurationSection(node)) {
-			return new ArrayList<String>(config.getConfigurationSection(node).getKeys(false));
-		}
-		else {
-			return new ArrayList<String>();
 		}
 	}
 
@@ -272,15 +243,15 @@ public class SimplyPlugin extends JavaPlugin {
 			return new HashMap<String, Boolean>();
 		}
 
-		Map<String, Boolean> perms = getNode("groups/" + group + "/permissions") == null ?
-				new HashMap<String, Boolean>() :
-				getAllPerms("group " + group, "groups/" + group + "/permissions");
-
+		Map<String, Boolean> perms = new HashMap<String, Boolean>();
+		for (String key : getNode("groups/" + group + "/permissions").getKeys(false)) {
+			perms.put(key, getNode("groups/" + group + "/permissions").getBoolean(key));
+		}
 
 		if (getNode("groups/" + group + "/worlds/" + world) != null) {
-			for (Map.Entry<String, Boolean> entry : getAllPerms("group " + group, "groups/" + group + "/worlds/" + world).entrySet()) {
+			for (String entry : getNode("groups/" + group + "/worlds/" + world).getKeys(false)) {
 				// No containskey; world overrides non-world
-				perms.put(entry.getKey(), entry.getValue());
+				perms.put(entry, getNode("groups/" + group + "/worlds/" + world).getBoolean(entry));
 			}
 		}
 
