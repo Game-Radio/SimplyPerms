@@ -172,7 +172,7 @@ public class SimplyPlugin extends JavaPlugin {
 	}
 
 	public void debug(String message) {
-		if (getConfig().getBoolean("debug", false)) {
+		if (config.getDebug()) {
 			getLogger().info("Debug: " + message);
 		}
 	}
@@ -201,7 +201,7 @@ public class SimplyPlugin extends JavaPlugin {
 	// -- Private stuff
 
 	private Map<String, Boolean> calculatePlayerPermissions(String player, String world) {
-		String default_group = getConfig().getString("default", "default");
+		String default_group = config.getDefaultGroup();
 		if (!config.isPlayerInDB(player)) {
 			return calculateGroupPermissions(default_group, world);
 		}
