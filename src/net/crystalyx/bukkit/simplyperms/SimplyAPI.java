@@ -188,6 +188,16 @@ public class SimplyAPI implements PermsConfig {
 		plugin.config.setDefaultGroup(group);
 	}
 
+	@Override
+	public boolean getDebug() {
+		return plugin.config.getDebug();
+	}
+
+	@Override
+	public void setDebug(boolean debug) {
+		plugin.config.setDebug(debug);
+	}
+
 	public void refreshPermissions() {
 		plugin.refreshPermissions();
 	}

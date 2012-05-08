@@ -291,4 +291,14 @@ public class ConfigFile implements PermsConfig {
 		plugin.getConfig().set("default", group);
 	}
 
+	@Override
+	public boolean getDebug() {
+		return plugin.getConfig().getBoolean("debug", false);
+	}
+
+	@Override
+	public void setDebug(boolean debug) {
+		plugin.getConfig().set("debug", debug);
+	}
+
 }

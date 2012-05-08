@@ -424,4 +424,14 @@ public class ConfigSQL implements PermsConfig {
 		config.setDefaultGroup(group);
 	}
 
+	@Override
+	public boolean getDebug() {
+		return config.getDebug();
+	}
+
+	@Override
+	public void setDebug(boolean debug) {
+		config.setDebug(debug);
+	}
+
 }

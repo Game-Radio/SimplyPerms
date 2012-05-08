@@ -75,4 +75,8 @@ public interface PermsConfig {
 	
 	public void setDefaultGroup(String group);
 
+	public boolean getDebug();
+
+	public void setDebug(boolean debug);
+
 }
