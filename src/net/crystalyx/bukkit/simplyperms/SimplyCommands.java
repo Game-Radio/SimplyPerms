@@ -441,19 +441,32 @@ public class SimplyCommands implements CommandExecutor {
 
 	private boolean checkPerm(CommandSender sender, String node, List<String> subnodes) {
 		boolean ok = sender.hasPermission("permissions." + node + ".*");
-		if (!ok) {
-			for (String subnode : subnodes) {
-				String testnode = "";
-				for (String sub : subnode.split(".")) {
-					testnode += sub;
-					if (sender.hasPermission("permissions." + node + "." + testnode)
-							|| sender.hasPermission("permissions." + node + "." + testnode + ".*")) {
+		for (String subnode : subnodes) {
+			String testnode = "";
+			for (String sub : subnode.split(".")) {
+				testnode += sub;
+				if (sender.isPermissionSet("permissions." + node + "." + testnode)) {
+					if (ok && !sender.hasPermission("permissions." + node + "." + testnode)) {
+						ok = false;
+						break;
+					}
+					else if (!ok && sender.hasPermission("permissions." + node + "." + testnode)) {
 						ok = true;
 						break;
 					}
 				}
-				if (ok) break;
+				else if (sender.isPermissionSet("permissions." + node + "." + testnode + ".*")) {
+					if (ok && !sender.hasPermission("permissions." + node + "." + testnode + ".*")) {
+						ok = false;
+						break;
+					}
+					else if (!ok && sender.hasPermission("permissions." + node + "." + testnode + ".*")) {
+						ok = true;
+						break;
+					}
+				}
 			}
+			if (!ok) break;
 		}
 		if (!ok) {
 			sender.sendMessage(ChatColor.RED + "You do not have permissions to do that.");
