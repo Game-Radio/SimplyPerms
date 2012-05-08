@@ -63,25 +63,21 @@ public abstract class SimplyPrevents implements Listener {
 		this.plugin = plugin;
 	}
 
-	public void sendMessage(Player player, String message) {
+	public void sendMessage(Player player, String node) {
 		Long next = throttleTimestamps.get(player);
 		next = Long.valueOf(next == null ? 0 : next.longValue());
 		long current = System.currentTimeMillis();
 
 		if (next.longValue() < current) {
-			player.sendMessage(message);
+			player.sendMessage(plugin.config.getMessage(node));
+			plugin.debug("Event '" + node + "' cancelled for " + player.getName());
 			throttleTimestamps.put(player, Long.valueOf(current + 3000));
 		}
 	}
 
 	private void deny(Cancellable event, Player player, String node) {
 		event.setCancelled(true);
-		if (plugin.getConfig().getString("messages/" + node) != null) {
-			sendMessage(player, plugin.getConfig().getString("messages/" + node).replace('&', '\u00A7'));
-		} else if (plugin.getConfig().getString("messages/all") != null) {
-			sendMessage(player, plugin.getConfig().getString("messages/all").replace('&', '\u00A7'));
-		}
-		plugin.debug("Event '" + node + "' cancelled for " + player.getName());
+		sendMessage(player, node);
 	}
 
 	protected boolean prevent(Cancellable event, Player player, String node) {

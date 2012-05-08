@@ -169,6 +169,11 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	@Override
+	public String getMessage(String key) {
+		return plugin.config.getMessage(key);
+	}
+
+	@Override
 	public void addMessage(String key, String message) {
 		plugin.config.addMessage(key, message);
 	}

@@ -67,6 +67,8 @@ public interface PermsConfig {
 
 	public Map<String, Object> getMessages();
 
+	public String getMessage(String key);
+
 	public void addMessage(String key, String message);
 
 	public void removeMessage(String key);

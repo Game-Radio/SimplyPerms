@@ -405,6 +405,11 @@ public class ConfigSQL implements PermsConfig {
 	}
 
 	@Override
+	public String getMessage(String key) {
+		return config.getMessage(key);
+	}
+
+	@Override
 	public void addMessage(String key, String message) {
 		config.addMessage(key, message);
 	}

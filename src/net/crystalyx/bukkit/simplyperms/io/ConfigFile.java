@@ -267,6 +267,11 @@ public class ConfigFile implements PermsConfig {
 	}
 
 	@Override
+	public String getMessage(String key) {
+		return plugin.getConfig().getString("messages/" + key, plugin.getConfig().getString("messages/all")).replace('&', '\u00A7');
+	}
+
+	@Override
 	public void addMessage(String key, String message) {
 		Map<String, Object> messages = getMessages();
 		if (!messages.containsKey(key)) messages.put(key, message);
