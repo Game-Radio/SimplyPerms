@@ -32,11 +32,12 @@ public class SimplyPlugin extends JavaPlugin {
 	// -- Basic stuff
 	@Override
 	public void onEnable() {
-		// Unregister existing PermissionsBukkit nodes
+		// Disable PermissionsBukkit to avoid bugs
 		if (getServer().getPluginManager().isPluginEnabled("PermissionsBukkit")) {
 			for (Permission perm : getServer().getPluginManager().getPlugin("PermissionsBukkit").getDescription().getPermissions()) {
 				getServer().getPluginManager().removePermission(perm);
 			}
+			getServer().getPluginManager().disablePlugin(getServer().getPluginManager().getPlugin("PermissionsBukkit"));
 		}
 
 		// Take care of configuration
