@@ -100,6 +100,7 @@ permissions:
     description: Allows use of /permissions player unsetperm.
   permissions.allow.*:
     description: Allows player to do everything.
+    default: true
     children:
       permissions.allow.bow: true
       permissions.allow.changesign: true
