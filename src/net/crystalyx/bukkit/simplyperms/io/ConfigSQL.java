@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.sql.Connection;
@@ -244,7 +244,7 @@ public class ConfigSQL implements PermsConfig {
 
 	@Override
 	public Map<String, Boolean> getPlayerPermissions(String player, String world) {
-		Map<String, Boolean> results = new HashMap<String, Boolean>();
+		Map<String, Boolean> results = new LinkedHashMap<String, Boolean>();
 		if (init()) {
 			try {
 				PreparedStatement sql = connection.prepareStatement("SELECT " + column_permission + ", " + column_value + " FROM " + table_players + " WHERE " + column_playerid + " = LOWER(?) AND " + column_world + " = ?");

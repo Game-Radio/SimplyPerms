@@ -1,7 +1,7 @@
 package net.crystalyx.bukkit.simplyperms.io;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -106,7 +106,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public Map<String, Boolean> getPlayerPermissions(String player, String world) {
-		Map<String, Boolean> finalPerms = new HashMap<String, Boolean>();
+		Map<String, Boolean> finalPerms = new LinkedHashMap<String, Boolean>();
 		String permNode = (!world.isEmpty()) ? "users/" + player + "/worlds/" + world : "users/" + player + "/permissions";
 		if (plugin.getNode(permNode) != null) {
 			for (Entry<String, Object> permPlayer : plugin.getNode(permNode).getValues(false).entrySet()) {
@@ -193,7 +193,7 @@ public class ConfigFile implements PermsConfig {
 	@Override
 	public Map<String, Boolean> getGroupPermissions(String group, String world) {
 		if (group.isEmpty()) group = getDefaultGroup();
-		Map<String, Boolean> finalPerms = new HashMap<String, Boolean>();
+		Map<String, Boolean> finalPerms = new LinkedHashMap<String, Boolean>();
 		String permNode = (!world.isEmpty()) ? "groups/" + group + "/worlds/" + world : "groups/" + group + "/permissions";
 		if (plugin.getNode(permNode) != null) {
 			for (Entry<String, Object> permGroup : plugin.getNode(permNode).getValues(false).entrySet()) {
@@ -262,7 +262,7 @@ public class ConfigFile implements PermsConfig {
 			return plugin.getNode("messages").getValues(false);
 		}
 		else {
-			return new HashMap<String, Object>();
+			return new LinkedHashMap<String, Object>();
 		}
 	}
 

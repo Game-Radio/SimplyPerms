@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -207,7 +208,7 @@ public class SimplyPlugin extends JavaPlugin {
 			return calculateGroupPermissions(default_group, world);
 		}
 
-		Map<String, Boolean> perms = new HashMap<String, Boolean>();
+		Map<String, Boolean> perms = new LinkedHashMap<String, Boolean>();
 		List<String> groups = config.getPlayerGroups(player);
 		if (groups.isEmpty()) groups.add(default_group);
 		perms.putAll(config.getPlayerPermissions(player));
@@ -227,7 +228,7 @@ public class SimplyPlugin extends JavaPlugin {
 
 	private Map<String, Boolean> calculateGroupPermissions(String group, String world) {
 		if (getNode("groups/" + group) == null) {
-			return new HashMap<String, Boolean>();
+			return new LinkedHashMap<String, Boolean>();
 		}
 
 		Map<String, Boolean> perms = config.getGroupPermissions(group);
