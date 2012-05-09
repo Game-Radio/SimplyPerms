@@ -262,6 +262,7 @@ permissions:
       permissions.allow.egg: true
       permissions.allow.potion: true
       permissions.allow.snowball: true
+      permissions.allow.enderpearl: true
   permissions.allow.vehicle:
     description: Allows the player to use vehicles
     children:
