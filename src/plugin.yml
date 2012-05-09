@@ -121,3 +121,166 @@ permissions:
     description: Allows unset all permissions node for this player.
   permissions.allow.*:
     description: Allows player to do everything.
+    children:
+      permissions.allow.bow: true
+      permissions.allow.changesign: true
+      permissions.allow.chat: true
+      permissions.allow.command: true
+      permissions.allow.damage: true
+      permissions.allow.fight: true
+      permissions.allow.hunger: true
+      permissions.allow.item: true
+      permissions.allow.monster: true
+      permissions.allow.sneak: true
+      permissions.allow.vehicle: true
+      permissions.allow.build: true
+      permissions.allow.craft: true
+      permissions.allow.interact: true
+      permissions.allow.loot: true
+      permissions.allow.chat: true
+      permissions.allow.spam: true
+      permissions.allow.projectile: true
+  permissions.allow.bow:
+    description: Allows the player to shoot bows
+  permissions.allow.changesign:
+    description: Allows the player to change signs
+  permissions.allow.chat:
+    description: Allows the player to chat
+  permissions.allow.command:
+    description: Allows the player to use all commands
+  permissions.allow.damage:
+    description: Allows the player to be damaged by anything
+  permissions.allow.fight:
+    description: Allows the player to fight
+  permissions.allow.hunger:
+    description: Allows the player to die by hunger
+  permissions.allow.item:
+    description: Allows the player to do item related things
+  permissions.allow.monster:
+    description: Allows the player to get targeted by mosters
+  permissions.allow.sneak:
+    description: Allows the player to sneak except in creative mode
+  permissions.allow.vehicle:
+    description: Allows the player to use vehicles
+  permissions.allow.build:
+    description: Allows the player to build
+    children:
+      permissions.allow.placeblock: true
+      permissions.allow.breakblock: true
+  permissions.allow.placeblock:
+    decription: Allows the player to place blocks
+  permissions.allow.breakblock:
+    description: Allows the player to break blocks
+  permissions.allow.craft:
+    description: Allows the player to do crafting related things
+    children:
+      permissions.allow.brew: true
+      permissions.allow.chest: true
+      permissions.allow.dispenser: true
+      permissions.allow.enchant: true
+      permissions.allow.furnace: true
+      permissions.allow.workbench: true
+  permissions.allow.brew:
+    description: Allows the player to brew
+  permissions.allow.chest:
+    description: Allows the player to use chests
+  permissions.allow.dispenser:
+    description: Allows the player to dispense
+  permissions.allow.enchant:
+    description: Allows the player to enchant
+  permissions.allow.furnace:
+    description: Allows the player to furnace
+  permissions.allow.workbench:
+    description: Allows the player to craft
+  permissions.allow.interact:
+    description: Allows the player to interact with the world
+    children:
+      permissions.allow.bed: true
+      permissions.allow.button: true
+      permissions.allow.cake: true
+      permissions.allow.door: true
+      permissions.allow.fish: true
+      permissions.allow.jukebox: true
+      permissions.allow.lever: true
+      permissions.allow.noteblocks: true
+      permissions.allow.pressureplate: true
+      permissions.allow.repeater: true
+      permissions.allow.animals: true
+  permissions.allow.bed:
+    description: Allows the player to sleep in beds
+  permissions.allow.button:
+    description: Allows the player to push buttons
+  permissions.allow.cake:
+    description: Allows the player to eat cake
+  permissions.allow.door:
+    description: Allows the player to open and close doors
+  permissions.allow.fish:
+    description: Allows the player to fish
+  permissions.allow.jukebox:
+    description: Allows the player to use jukebox
+  permissions.allow.lever:
+    description: Allows the player to use levers
+  permissions.allow.noteblocks:
+    description: Allows the player to change noteblocks
+  permissions.allow.pressureplate:
+    description: Allows the player to trigger pressure plates
+  permissions.allow.repeater:
+    description: Allows the player to change repeater delays
+  permissions.allow.animals:
+    description: Allows the player to interact with animals
+    children:
+      permissions.allow.shear: true
+      permissions.allow.tame: true
+  permissions.allow.shear:
+    description: Allows the player to shear animals
+  permissions.allow.tame:
+    description: Allows the player to tame animals
+  permissions.allow.bucket:
+    description: Allows the player to use buckets
+    children:
+      permissions.allow.waterbucket: true
+      permissions.allow.lavabucket: true
+      permissions.allow.milking: true
+  permissions.allow.waterbucket:
+    description: Allows the player to use water buckets
+  permissions.allow.lavabucket:
+    description: Allows the player to use lava buckets
+  permissions.allow.milking:
+    description: Allows the player to fill buckets with milk
+  permissions.allow.fire:
+    description: Allows the player to make fire
+    children:
+      permissions.allow.fireball: true
+      permissions.allow.flintandsteel: true
+  permissions.allow.fireball:
+    description: Allows the player to use fireball
+  permissions.allow.flintandsteel:
+    description: Allows the player to use flint and steel
+  permissions.allow.loot:
+    description: Allows the player to drop and pickup items
+    children:
+      permissions.allow.drop: true
+      permissions.allow.pickup: true
+  permissions.allow.drop:
+    description: Allows the player to drop items
+  permissions.allow.pickup:
+    description: Allows the player to pickup items
+  permissions.allow.chat:
+    description: Allows the player to chat
+    children:
+      permissions.allow.spam: true
+  permissions.allow.spam:
+    description: Allows the player to spam
+    children:
+      permissions.allow.capslock: true
+      permissions.allow.flood: true
+  permissions.allow.capslock:
+    description: ALLOWS THE PLAYER TO USE CAPSLOCK
+  permissions.allow.flood:
+    description: Allows the player to chat as fast as he wants
+  permissions.allow.projectile:
+    description: Allows the player to throw items
+    children:
+      permissions.allow.egg: true
+      permissions.allow.potion: true
+      permissions.allow.snowball: true
