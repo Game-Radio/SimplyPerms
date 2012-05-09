@@ -98,7 +98,7 @@ public class SimplyPlugin extends JavaPlugin {
 			if (configsql.checkDatabase()) {
 				config = configsql;
 			} else {
-				debug("Fail to connect to database !");
+				getLogger().info("Fail to connect to database !");
 				config = new ConfigFile(this);
 			}
 		}
