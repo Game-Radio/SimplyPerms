@@ -7,8 +7,6 @@ SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit
 
 **WARNING : SimplyPerms is not compatible with PermissionsBukkit or other permissions plugins, SimplyPerms will disable all permissions plugins !**
 
-*Source code is included in the jar file !*
-
 ## [Commands][2]
 
 ## [Permissions and authorizations][3]
