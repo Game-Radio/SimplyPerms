@@ -124,7 +124,6 @@ permissions:
     children:
       permissions.allow.bow: true
       permissions.allow.changesign: true
-      permissions.allow.chat: true
       permissions.allow.command: true
       permissions.allow.damage: true
       permissions.allow.fight: true
