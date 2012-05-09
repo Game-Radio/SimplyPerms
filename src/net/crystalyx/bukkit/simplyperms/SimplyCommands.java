@@ -466,6 +466,7 @@ public class SimplyCommands implements CommandExecutor {
 					}
 				}
 			}
+			if (!ok) break;
 		}
 		if (!ok) {
 			sender.sendMessage(ChatColor.RED + "You do not have permissions to do that.");
