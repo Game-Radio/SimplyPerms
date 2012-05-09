@@ -137,7 +137,6 @@ permissions:
       permissions.allow.craft: true
       permissions.allow.interact: true
       permissions.allow.loot: true
-      permissions.allow.chat: true
       permissions.allow.projectile: true
   permissions.allow.bow:
     description: Allows the player to shoot bows
