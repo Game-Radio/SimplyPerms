@@ -202,6 +202,8 @@ permissions:
       permissions.allow.pressureplate: true
       permissions.allow.repeater: true
       permissions.allow.animals: true
+      permissions.allow.bucket: true
+      permissions.allow.fire: true
   permissions.allow.bed:
     description: Allows the player to sleep in beds
   permissions.allow.button:
