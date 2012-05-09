@@ -228,7 +228,7 @@ public class SimplyPlugin extends JavaPlugin {
 
 	private Map<String, Boolean> calculateGroupPermissions(String group, String world) {
 		if (getNode("groups/" + group) == null) {
-			return new LinkedHashMap<String, Boolean>();
+			return new HashMap<String, Boolean>();
 		}
 
 		Map<String, Boolean> perms = config.getGroupPermissions(group);
