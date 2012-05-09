@@ -1,4 +1,4 @@
-package net.crystalyx.bukkit.simplyperms.preventions.spam;
+package net.crystalyx.bukkit.simplyperms.preventions.chat;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

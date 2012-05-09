@@ -1,4 +1,4 @@
-package net.crystalyx.bukkit.simplyperms.preventions.spam;
+package net.crystalyx.bukkit.simplyperms.preventions.chat;
 
 import java.util.HashMap;
 

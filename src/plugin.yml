@@ -132,12 +132,12 @@ permissions:
       permissions.allow.item: true
       permissions.allow.monster: true
       permissions.allow.sneak: true
-      permissions.allow.vehicle: true
       permissions.allow.build: true
       permissions.allow.craft: true
       permissions.allow.interact: true
       permissions.allow.loot: true
       permissions.allow.projectile: true
+      permissions.allow.vehicle: true
   permissions.allow.bow:
     description: Allows the player to shoot bows
   permissions.allow.changesign:

@@ -1,4 +1,4 @@
-package net.crystalyx.bukkit.simplyperms.preventions;
+package net.crystalyx.bukkit.simplyperms.preventions.chat;
 
 import net.crystalyx.bukkit.simplyperms.SimplyPlugin;
 import net.crystalyx.bukkit.simplyperms.SimplyPrevents;
