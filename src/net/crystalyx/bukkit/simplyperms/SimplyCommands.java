@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 import net.crystalyx.bukkit.simplyperms.imports.ImportDB;
@@ -233,7 +232,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("setperm")) {
 			if (!checkPerm(sender, "group.setperm")) return true;
 			if (split.length != 4 && split.length != 5) return usage(sender, command, "group setperm");
-			if (!checkPerm(sender, "group.setperm", Arrays.asList(split[3].split(",")))) return true;
 			String group = split[2];
 			String perm = split[3];
 			boolean value = (split.length != 5) || Boolean.parseBoolean(split[4]);
@@ -261,7 +259,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("unsetperm")) {
 			if (!checkPerm(sender, "group.unsetperm")) return true;
 			if (split.length != 4) return usage(sender, command, "group unsetperm");
-			if (!checkPerm(sender, "group.unsetperm", Arrays.asList(split[3].split(",")))) return true;
 			String group = split[2].toLowerCase();
 			String perm = split[3];
 
@@ -320,7 +317,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("setgroup")) {
 			if (!checkPerm(sender, "player.setgroup")) return true;
 			if (split.length != 4) return usage(sender, command, "player setgroup");
-			if (!checkPerm(sender, "player.setgroup", Arrays.asList(split[3].split(",")))) return true;
 			String player = split[2].toLowerCase();
 			String[] groups = split[3].split(",");
 
@@ -336,7 +332,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("addgroup")) {
 			if (!checkPerm(sender, "player.addgroup")) return true;
 			if (split.length != 4) return usage(sender, command, "player addgroup");
-			if (!checkPerm(sender, "player.addgroup", Arrays.asList(split[3]))) return true;
 			String player = split[2].toLowerCase();
 			String group = split[3];
 
@@ -353,7 +348,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("removegroup")) {
 			if (!checkPerm(sender, "player.removegroup")) return true;
 			if (split.length != 4) return usage(sender, command, "player removegroup");
-			if (!checkPerm(sender, "player.removegroup", Arrays.asList(split[3]))) return true;
 			String player = split[2].toLowerCase();
 			String group = split[3];
 
@@ -385,7 +379,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("setperm")) {
 			if (!checkPerm(sender, "player.setperm")) return true;
 			if (split.length != 4 && split.length != 5) return usage(sender, command, "player setperm");
-			if (!checkPerm(sender, "player.setperm", Arrays.asList(split[3].split(",")))) return true;
 			String player = split[2].toLowerCase();
 			String perm = split[3];
 			boolean value = (split.length != 5) || Boolean.parseBoolean(split[4]);
@@ -404,7 +397,6 @@ public class SimplyCommands implements CommandExecutor {
 		} else if (subcommand.equals("unsetperm")) {
 			if (!checkPerm(sender, "player.unsetperm")) return true;
 			if (split.length != 4) return usage(sender, command, "player unsetperm");
-			if (!checkPerm(sender, "player.unsetperm", Arrays.asList(split[3].split(",")))) return true;
 			String player = split[2].toLowerCase();
 			String perm = split[3];
 
@@ -433,41 +425,6 @@ public class SimplyCommands implements CommandExecutor {
 
 	private boolean checkPerm(CommandSender sender, String subnode) {
 		boolean ok = sender.hasPermission("permissions." + subnode);
-		if (!ok) {
-			sender.sendMessage(ChatColor.RED + "You do not have permissions to do that.");
-		}
-		return ok;
-	}
-
-	private boolean checkPerm(CommandSender sender, String node, List<String> subnodes) {
-		boolean ok = sender.hasPermission("permissions." + node + ".*");
-		for (String subnode : subnodes) {
-			String testnode = "";
-			for (String sub : subnode.split(".")) {
-				testnode += sub;
-				if (sender.isPermissionSet("permissions." + node + "." + testnode)) {
-					if (ok && !sender.hasPermission("permissions." + node + "." + testnode)) {
-						ok = false;
-						break;
-					}
-					else if (!ok && sender.hasPermission("permissions." + node + "." + testnode)) {
-						ok = true;
-						break;
-					}
-				}
-				else if (sender.isPermissionSet("permissions." + node + "." + testnode + ".*")) {
-					if (ok && !sender.hasPermission("permissions." + node + "." + testnode + ".*")) {
-						ok = false;
-						break;
-					}
-					else if (!ok && sender.hasPermission("permissions." + node + "." + testnode + ".*")) {
-						ok = true;
-						break;
-					}
-				}
-			}
-			if (!ok) break;
-		}
 		if (!ok) {
 			sender.sendMessage(ChatColor.RED + "You do not have permissions to do that.");
 		}
