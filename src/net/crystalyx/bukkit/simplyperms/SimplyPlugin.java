@@ -251,7 +251,7 @@ public class SimplyPlugin extends JavaPlugin {
 			try {
 				getServer().getPluginManager().registerEvents((SimplyPrevents) Class.forName(path + ".preventions." + prevent).getDeclaredConstructor(SimplyPlugin.class).newInstance(this), this);
 			} catch (Exception e) {
-				debug(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 	}

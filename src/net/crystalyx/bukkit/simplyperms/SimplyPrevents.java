@@ -13,7 +13,6 @@ public abstract class SimplyPrevents implements Listener {
 	public static String[] preventions = {
 		"Bow",
 		"Changesign",
-		"Chat",
 		"Command",
 		"Damage",
 		"Fight",
