@@ -160,8 +160,6 @@ permissions:
     description: Allows the player to get targeted by mosters
   permissions.allow.sneak:
     description: Allows the player to sneak except in creative mode
-  permissions.allow.vehicle:
-    description: Allows the player to use vehicles
   permissions.allow.build:
     description: Allows the player to build
     children:
@@ -284,3 +282,18 @@ permissions:
       permissions.allow.egg: true
       permissions.allow.potion: true
       permissions.allow.snowball: true
+  permissions.allow.vehicle:
+    description: Allows the player to use vehicles
+    children:
+      permissions.allow.vehicle.collision: true
+      permissions.allow.vehicle.destroy: true
+      permissions.allow.vehicle.enter: true
+      permissions.allow.vehicle.place: true
+  permissions.allow.vehicle.collision:
+    description: Allows the player to collide with vehicles
+  permissions.allow.vehicle.destroy:
+    description: Allows the player to destroy vehicles
+  permissions.allow.vehicle.enter:
+    description: Allows the player to enter into vehicles
+  permissions.allow.vehicle.place:
+    description: Allows the player to place vehicles
