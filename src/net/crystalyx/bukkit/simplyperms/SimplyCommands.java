@@ -301,7 +301,7 @@ public class SimplyCommands implements CommandExecutor {
 			String player = split[2].toLowerCase();
 
 			if (!plugin.config.isPlayerInDB(player)) {
-				sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.RED + " is in the default group.");
+				sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.RED + " is in the " + plugin.config.getDefaultGroup() + " group.");
 				return true;
 			}
 
