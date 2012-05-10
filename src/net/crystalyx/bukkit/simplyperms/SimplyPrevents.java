@@ -81,6 +81,8 @@ public abstract class SimplyPrevents implements Listener {
 			for (String subNode : node.split(",")) {
 				if (prevent(event, player, subNode)) {
 					return true;
+				} else if (player.isPermissionSet("permissions.allow." + subNode)) {
+					return false;
 				}
 			}
 		} else if (node.contains(".")) {
