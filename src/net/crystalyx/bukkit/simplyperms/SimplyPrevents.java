@@ -76,11 +76,6 @@ public abstract class SimplyPrevents implements Listener {
 		}
 	}
 
-	private void deny(Cancellable event, Player player, String node) {
-		event.setCancelled(true);
-		sendMessage(player, node);
-	}
-
 	protected boolean prevent(Cancellable event, Player player, String node) {
 		if (node.contains(",")) {
 			for (String subNode : node.split(",")) {
@@ -91,7 +86,8 @@ public abstract class SimplyPrevents implements Listener {
 		} else if (node.contains(".")) {
 			if (player.isPermissionSet("permissions.allow." + node)) {
 				if (!player.hasPermission("permissions.allow." + node)) {
-					deny(event, player, node);
+					event.setCancelled(true);
+					sendMessage(player, node);
 					return true;
 				}
 			} else if (prevent(event, player, node.substring(0, node.indexOf('.')))) {
@@ -99,12 +95,14 @@ public abstract class SimplyPrevents implements Listener {
 			}
 		} else if (player.isPermissionSet("permissions.allow." + node)) {
 			if (!player.hasPermission("permissions.allow." + node)) {
-				deny(event, player, node);
+				event.setCancelled(true);
+				sendMessage(player, node);
 				return true;
 			}
 		} else if (player.isPermissionSet("permissions.allow.*")
 				&& !player.hasPermission("permissions.allow.*")) {
-			deny(event, player, node);
+			event.setCancelled(true);
+			sendMessage(player, node);
 			return true;
 		}
 		return false;
