@@ -2,7 +2,7 @@
 
 ### *When powerful plugin made Permissions easy !*
 
-SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit ideas with the new Configuration API.
+SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit ideas with some new really great features !
 
 **WARNING : SimplyPerms is not compatible with PermissionsBukkit or other permissions plugins, SimplyPerms will disable all permissions plugins !**
 
