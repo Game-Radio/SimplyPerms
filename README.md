@@ -31,10 +31,6 @@ For the database connection, [please refer to this page][7]
 *   Import from other Permissions Plugins
 *   **Feel free to ask me new features, improvements or bugs :D**
 
-## Donations
-
-I make my plugins with my free time and for free, if you like my work, you can buy me a coffee :D
-
  [2]: http://dev.bukkit.org/server-mods/simplyperms/pages/commands/
  [3]: http://dev.bukkit.org/server-mods/simplyperms/pages/permissions-and-authorizations/
  [4]: http://dev.bukkit.org/server-mods/simplyperms/pages/import-from-other-plugins/
