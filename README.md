@@ -1,5 +1,4 @@
-SimplyPerms
-===========
+![](http://dev.bukkit.org/media/images/40/348/simplyperms3.png)
 
 ### *When powerful plugin made Permissions easy !*
 
