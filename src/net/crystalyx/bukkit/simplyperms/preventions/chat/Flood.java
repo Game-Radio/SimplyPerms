@@ -22,7 +22,7 @@ public class Flood extends SimplyPrevents {
 	public void chat(PlayerChatEvent event) {
 		Player player = event.getPlayer();
 		if (isChatLocked(player)) {
-			prevent(event, player, "flood,chat");
+			prevent(event, player, "flood,spam");
 		} else {
 			setChatLock(player);
 		}

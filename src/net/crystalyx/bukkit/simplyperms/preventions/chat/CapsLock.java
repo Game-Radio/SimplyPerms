@@ -23,7 +23,7 @@ public class CapsLock extends SimplyPrevents {
 		String nocaps = message.replaceAll("[A-Z]*", "");
 		if (message.length() > 5
 				&& message.length() - nocaps.length() > message.length() / 2) {
-			prevent(event, event.getPlayer(), "capslock,chat");
+			prevent(event, event.getPlayer(), "capslock,spam");
 		}
 	}
 
