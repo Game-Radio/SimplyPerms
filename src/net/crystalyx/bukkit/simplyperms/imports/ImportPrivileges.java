@@ -21,7 +21,7 @@ public class ImportPrivileges extends SimplyAPI implements ImportManager {
 		try {
 			privileges.load("plugins/Privileges/config.yml");
 			setDefaultGroup(privileges.getString("default_group"));
-			plugin.getConfig().set("debug", privileges.getBoolean("debug"));
+			setDebug(privileges.getBoolean("debug"));
 
 			privileges.load("plugins/Privileges/users.yml");
 			for (String player : plugin.getKeys(privileges, "users")) {

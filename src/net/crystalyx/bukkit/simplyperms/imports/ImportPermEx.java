@@ -20,7 +20,7 @@ public class ImportPermEx extends SimplyAPI implements ImportManager {
 	public void run() throws Exception {
 		try {
 			permEx.load("plugins/PermissionsEx/config.yml");
-			plugin.getConfig().set("debug", permEx.getBoolean("permissions.debug"));
+			setDebug(permEx.getBoolean("permissions.debug"));
 			permEx.load("plugins/PermissionsEx/" + permEx.getString("permissions.backends.file.file"));
 
 			for (String player : plugin.getKeys(permEx, "users")) {

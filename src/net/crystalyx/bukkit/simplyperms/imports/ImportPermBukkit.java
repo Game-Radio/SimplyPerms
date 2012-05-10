@@ -23,7 +23,7 @@ public class ImportPermBukkit extends SimplyAPI implements ImportManager {
 	public void run() throws Exception {
 		try {
 			permBukkit.load("plugins/PermissionsBukkit/config.yml");
-			plugin.getConfig().set("debug", permBukkit.getBoolean("debug"));
+			setDebug(permBukkit.getBoolean("debug"));
 			addMessage("build", permBukkit.getString("messages/build"));
 
 			for (String player : plugin.getKeys(permBukkit, "users")) {
