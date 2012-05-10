@@ -79,8 +79,8 @@ public abstract class SimplyPrevents implements Listener {
 	protected boolean prevent(Cancellable event, Player player, String node) {
 		if (node.contains(",")) {
 			for (String subNode : node.split(",")) {
-				if (!prevent(event, player, subNode)) {
-					return false;
+				if (prevent(event, player, subNode)) {
+					return true;
 				}
 			}
 		} else if (node.contains(".")) {
