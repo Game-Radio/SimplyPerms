@@ -3,6 +3,7 @@ main: net.crystalyx.bukkit.simplyperms.SimplyPlugin
 author: Xefir Destiny
 website: http://dev.bukkit.org/server-mods/simplyperms/
 version: 1.7.1
+dscription: When powerful plugin made Permissions easy !
 softdepend: [ PermissionsBukkit ]
 commands:
   permissions:
