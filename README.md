@@ -24,13 +24,14 @@ For the database connection, [please refer to this page][7]
 
 # SimplyWrap
 
-This make plugins based on PermissionsBukkit API compatible with SimplyPerms. [You can download it here][10]
+This make plugins based on PermissionsBukkit API compatible with SimplyPerms. [You can download it here.][10]
 
 *Not all PermissionsBukkit plugin will work with this ! Try and give me your feedbacks !*
 
 # SimplyRank
 
-This allow you to use the rank feature with SimplyPerms. [You can download it here][13]
+This allow you to use the rank feature with SimplyPerms. [You can download it here.][13]
+
 With this you can allow someone to grant someone else on a specified group.
 
 Commands :
