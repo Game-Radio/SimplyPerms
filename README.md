@@ -4,7 +4,7 @@
 
 SimplyPerms is yet another Permissions plugin manager based on PermissionsBukkit ideas with some new really great features !
 
-**WARNING : SimplyPerms is not compatible with PermissionsBukkit or other permissions plugins, SimplyPerms will disable all permissions plugins !**
+**WARNING : SimplyPerms is not compatible with PermissionsBukkit or other permissions plugins !**
 
 ## [Commands][2]
 
@@ -22,27 +22,33 @@ For the database connection, [please refer to this page][7]
 
 ## Add-ons
 
-# SimplyWrap
+### [SimplyWrap][10]
 
-This make plugins based on PermissionsBukkit API compatible with SimplyPerms. [You can download it here.][10]
+This make plugins based on PermissionsBukkit API compatible with SimplyPerms.
+
+[You can download it here.][10]
 
 *Not all PermissionsBukkit plugin will work with this ! Try and give me your feedbacks !*
 
-# SimplyRank
+### [SimplyRank][14]
 
-This allow you to use the rank feature with SimplyPerms. [You can download it here.][13]
+This allow you to use the rank feature with SimplyPerms.
+
+[You can download it here.][14]
 
 With this you can allow someone to grant someone else on a specified group.
 
 Commands :
+
 *   /rank [player] [group]
 *   /ranker [player] [group]
 *   /setrank [player] [group]
 
 Permission:
+
 *   permissions.rank.[groupname]
 
-## Source code
+## [Source code][11]
 
 All my work is available in GitHub :
 **[SimplyPerms][11]** / *[SimplyWrap][12] / [SimplyRank][15]*
@@ -59,7 +65,7 @@ All my work is available in GitHub :
 *   Import from other Permissions Plugins
 *   **Feel free to ask me new features, improvements or bugs :D**
 
-## Donate
+## [Donate][13]
 
 I make my plugins with my free time and for free, if you like my work, [you can buy me a coffee][13] :D
 
