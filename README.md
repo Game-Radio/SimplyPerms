@@ -43,6 +43,10 @@ All my work is available in GitHub :
 *   Import from other Permissions Plugins
 *   **Feel free to ask me new features, improvements or bugs :D**
 
+## Donate
+
+I make my plugins with my free time and for free, if you like my work, [you can buy me a coffee][13] :D
+
  [2]: http://dev.bukkit.org/server-mods/simplyperms/pages/commands/
  [3]: http://dev.bukkit.org/server-mods/simplyperms/pages/permissions-and-authorizations/
  [4]: http://dev.bukkit.org/server-mods/simplyperms/pages/import-from-other-plugins/
@@ -54,3 +58,4 @@ All my work is available in GitHub :
  [10]: https://github.com/downloads/Xefir/SimplyWrap/SimplyWrap.jar
  [11]: https://github.com/Xefir/SimplyPerms
  [12]: https://github.com/Xefir/SimplyWrap
+ [13]: 
