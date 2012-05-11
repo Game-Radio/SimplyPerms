@@ -46,7 +46,8 @@ All my work is available in GitHub :
 ## Donate
 
 I make my plugins with my free time and for free, if you like my work, [you can buy me a coffee][13] :D
-![](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)[13]
+
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)][13]
 
  [2]: http://dev.bukkit.org/server-mods/simplyperms/pages/commands/
  [3]: http://dev.bukkit.org/server-mods/simplyperms/pages/permissions-and-authorizations/
