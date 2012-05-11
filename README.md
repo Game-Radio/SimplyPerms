@@ -29,7 +29,7 @@ An add-on of SimplyPerms is available to make plugins based on PermissionsBukkit
 ## Source code
 
 All my work is available in GitHub :
-*   **[SimplyPerms][11]** / *[SimplyWrap][12]*
+**[SimplyPerms][11]** / *[SimplyWrap][12]*
 
 ## Thanks
 
