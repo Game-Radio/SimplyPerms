@@ -20,16 +20,31 @@ Please refer to the [PermissionsBukkit documentation][5]
 An example configuration file [can be found here][6]  
 For the database connection, [please refer to this page][7]
 
-## [SimplyWrap][10]
+## Add-ons
 
-An add-on of SimplyPerms is available to make plugins based on PermissionsBukkit API compatible with this plugin. [You can download it here][10]
+# SimplyWrap
+
+This make plugins based on PermissionsBukkit API compatible with SimplyPerms. [You can download it here][10]
 
 *Not all PermissionsBukkit plugin will work with this ! Try and give me your feedbacks !*
+
+# SimplyRank
+
+This allow you to use the rank feature with SimplyPerms. [You can download it here][13]
+With this you can allow someone to grant someone else on a specified group.
+
+Commands :
+*   /rank [player] [group]
+*   /ranker [player] [group]
+*   /setrank [player] [group]
+
+Permission:
+*   permissions.rank.[groupname]
 
 ## Source code
 
 All my work is available in GitHub :
-**[SimplyPerms][11]** / *[SimplyWrap][12]*
+**[SimplyPerms][11]** / *[SimplyWrap][12] / [SimplyRank][15]*
 
 ## Thanks
 
@@ -60,3 +75,5 @@ I make my plugins with my free time and for free, if you like my work, [you can 
  [11]: https://github.com/Xefir/SimplyPerms
  [12]: https://github.com/Xefir/SimplyWrap
  [13]: https://github.com/downloads/Xefir/SimplyPerms/donate.html
+ [14]: https://github.com/downloads/Xefir/SimplyRank/SimplyRank.jar
+ [15]: https://github.com/Xefir/SimplyRank
