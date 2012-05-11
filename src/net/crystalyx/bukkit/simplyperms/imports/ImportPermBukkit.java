@@ -31,8 +31,10 @@ public class ImportPermBukkit extends SimplyAPI implements ImportManager {
 					addPlayerGroup(player, group);
 				} 
 
-				for (Entry<String, Object> perm : permBukkit.getConfigurationSection("users/" + player + "/permissions").getValues(false).entrySet()) {
-					addPlayerPermission(player, perm.getKey(), (Boolean) perm.getValue());
+				if (permBukkit.getConfigurationSection("users/" + player + "/permissions") != null) {
+					for (Entry<String, Object> perm : permBukkit.getConfigurationSection("users/" + player + "/permissions").getValues(false).entrySet()) {
+						addPlayerPermission(player, perm.getKey(), (Boolean) perm.getValue());
+					}
 				}
 
 				for (String world : plugin.getKeys(permBukkit, "users/" + player + "/worlds")) {
@@ -43,8 +45,10 @@ public class ImportPermBukkit extends SimplyAPI implements ImportManager {
 			}
 
 			for (String group : plugin.getKeys(permBukkit, "groups")) {
-				for (Entry<String, Object> perms : permBukkit.getConfigurationSection("groups/" + group + "/permissions").getValues(false).entrySet()) {
-					addGroupPermission(group, perms.getKey(), (Boolean) perms.getValue());
+				if (permBukkit.getConfigurationSection("groups/" + group + "/permissions") != null) {
+					for (Entry<String, Object> perms : permBukkit.getConfigurationSection("groups/" + group + "/permissions").getValues(false).entrySet()) {
+						addGroupPermission(group, perms.getKey(), (Boolean) perms.getValue());
+					}
 				}
 
 				for (String world : plugin.getKeys(permBukkit, "groups/" + group + "/worlds")) {
