@@ -3,3 +3,4 @@
 .settings
 /bin
 .git
+*.class
