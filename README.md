@@ -20,6 +20,13 @@ Please refer to the [PermissionsBukkit documentation][5]
 An example configuration file [can be found here][6]  
 For the database connection, [please refer to this page][7]
 
+## [SimplyWrapper][10]
+
+An add-on of SimplyPerms is available to make plugins based on PermissionsBukkit API compatible with this plugin.
+[You can download it here][10]
+
+*Note : Not all PermissionsBukkit plugin will work with this ! Try and give me your feedbacks !*
+
 ## Thanks
 
 *   [PermissionsBukkit][8] by SpaceManiac for core permissions code
@@ -39,3 +46,5 @@ For the database connection, [please refer to this page][7]
  [7]: http://dev.bukkit.org/server-mods/simplyperms/pages/database-connection/
  [8]: http://dev.bukkit.org/server-mods/permbukkit/
  [9]: http://dev.bukkit.org/server-mods/antiguest/
+ [10] : http://dev.bukkit.org/server-mods/simplyperms/files/17-simply-wrapper-1-0/
+
