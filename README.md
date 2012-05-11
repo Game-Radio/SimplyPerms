@@ -51,6 +51,7 @@ All my work is available in GitHub :
 
 *   [PermissionsBukkit][8] by SpaceManiac for core permissions code
 *   [AntiGuest][9] by QuickWango for part of authorizations feature
+*   [milkywayz][16] for the modified PermissionsBukkit to include rank feature
 
 ## Todo
 
@@ -78,3 +79,4 @@ I make my plugins with my free time and for free, if you like my work, [you can 
  [13]: https://github.com/downloads/Xefir/SimplyPerms/donate.html
  [14]: https://github.com/downloads/Xefir/SimplyRank/SimplyRank.jar
  [15]: https://github.com/Xefir/SimplyRank
+ [16]: https://github.com/milkywayz/PermissionsBukkit
