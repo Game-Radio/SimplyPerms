@@ -44,7 +44,7 @@ Commands :
 *   /ranker [player] [group]
 *   /setrank [player] [group]
 
-Permission:
+Permission :
 
 *   permissions.rank.[groupname]
 
