@@ -298,7 +298,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public boolean getDebug() {
-		return plugin.getConfig().getBoolean("debug", false);
+		return plugin.getConfig().getBoolean("debug", true);
 	}
 
 	@Override
