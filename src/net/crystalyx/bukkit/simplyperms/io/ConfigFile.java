@@ -18,16 +18,19 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public void removePlayer(String player) {
+		player = player.toLowerCase();
 		plugin.getConfig().set("users/" + player, null);
 	}
 
 	@Override
 	public void removePlayerGroups(String player) {
+		player = player.toLowerCase();
 		plugin.getConfig().set("users/" + player + "/groups", null);
 	}
 
 	@Override
 	public void removePlayerGroup(String player, String group) {
+		player = player.toLowerCase();
 		List<String> groups = getPlayerGroups(player);
 		groups.remove(group);
 		plugin.getConfig().set("users/" + player + "/groups", (groups.isEmpty()) ? null : groups);
@@ -35,6 +38,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public void addPlayerGroup(String player, String group) {
+		player = player.toLowerCase();
 		if (group.isEmpty()) return;
 		List<String> groups = getPlayerGroups(player);
 		if (!groups.contains(group)) groups.add(group);
@@ -48,6 +52,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public void addPlayerPermission(String player, String world, String permission, boolean value) {
+		player = player.toLowerCase();
 		Map<String, Boolean> permissions = getPlayerPermissions(player, world);
 		if (permissions.containsKey(permission)) permissions.remove(permission);
 		permissions.put(permission, value);
@@ -61,6 +66,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public void removePlayerPermissions(String player) {
+		player = player.toLowerCase();
 		plugin.getConfig().set("users/" + player + "/permissions", null);
 	}
 
@@ -71,6 +77,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public void removePlayerPermission(String player, String world, String permission) {
+		player = player.toLowerCase();
 		Map<String, Boolean> permissions = getPlayerPermissions(player, world);
 		permissions.remove(permission);
 		if (!world.isEmpty()) {
@@ -96,6 +103,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public List<String> getPlayerGroups(String player) {
+		player = player.toLowerCase();
 		return plugin.getConfig().getStringList("users/" + player + "/groups");
 	}
 
@@ -106,6 +114,7 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public Map<String, Boolean> getPlayerPermissions(String player, String world) {
+		player = player.toLowerCase();
 		Map<String, Boolean> finalPerms = new LinkedHashMap<String, Boolean>();
 		String permNode = (!world.isEmpty()) ? "users/" + player + "/worlds/" + world : "users/" + player + "/permissions";
 		if (plugin.getNode(permNode) != null) {
@@ -118,11 +127,13 @@ public class ConfigFile implements PermsConfig {
 
 	@Override
 	public boolean isPlayerInDB(String player) {
+		player = player.toLowerCase();
 		return plugin.getNode("users/" + player) != null;
 	}
 
 	@Override
 	public List<String> getPlayerWorlds(String player) {
+		player = player.toLowerCase();
 		if (plugin.getNode("users/" + player + "/worlds") != null) {
 			return new ArrayList<String>(plugin.getNode("users/" + player + "/worlds").getKeys(false));
 		}

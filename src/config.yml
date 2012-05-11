@@ -18,7 +18,7 @@ db:
         value: value
         date: date
 users:
-    ConspiracyWizard:
+    conspiracywizard:
         permissions:
             permissions.example: true
         groups:
