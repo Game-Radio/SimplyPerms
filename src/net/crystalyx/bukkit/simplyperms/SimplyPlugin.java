@@ -92,8 +92,7 @@ public class SimplyPlugin extends JavaPlugin {
 	}
 
 	private void initDatabase() {
-		if (getConfig().getString("db/type") != null
-				&& !getConfig().getString("db/type").equals("file")) {
+		if (!getConfig().getString("db/type", "file").equals("file")) {
 			ConfigSQL configsql = new ConfigSQL(this);
 			if (configsql.checkDatabase()) {
 				config = configsql;
