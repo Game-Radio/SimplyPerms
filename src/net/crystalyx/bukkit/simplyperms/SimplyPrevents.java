@@ -30,6 +30,7 @@ public abstract class SimplyPrevents implements Listener {
 		"chat.Chat",
 		"chat.CapsLock",
 		"chat.Flood",
+		"chat.Macros",
 		"craft.Brew",
 		"craft.Chest",
 		"craft.Dispenser",
