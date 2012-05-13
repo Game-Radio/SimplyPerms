@@ -253,10 +253,13 @@ permissions:
     children:
       permissions.allow.capslock: true
       permissions.allow.flood: true
+      permissions.allow.macros: true
   permissions.allow.capslock:
     description: ALLOWS THE PLAYER TO USE CAPSLOCK
   permissions.allow.flood:
     description: Allows the player to chat as fast as he wants
+  permissions.allow.macros:
+    description: Allows the player to spam commands
   permissions.allow.projectile:
     description: Allows the player to throw items
     children:
