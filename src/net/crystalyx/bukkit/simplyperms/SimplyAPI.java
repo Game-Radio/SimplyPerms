@@ -16,46 +16,55 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void removePlayer(String player) {
 		plugin.config.removePlayer(player);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removePlayerGroups(String player) {
 		plugin.config.removePlayerGroups(player);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removePlayerGroup(String player, String group) {
 		plugin.config.removePlayerGroup(player, group);
+		refreshPermissions();
 	}
 
 	@Override
 	public void addPlayerGroup(String player, String group) {
 		plugin.config.addPlayerGroup(player, group);
+		refreshPermissions();
 	}
 
 	@Override
 	public void addPlayerPermission(String player, String permission, boolean value) {
 		plugin.config.addPlayerPermission(player, permission, value);
+		refreshPermissions();
 	}
 
 	@Override
 	public void addPlayerPermission(String player, String world, String permission, boolean value) {
 		plugin.config.addPlayerPermission(player, world, permission, value);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removePlayerPermissions(String player) {
 		plugin.config.removePlayerPermissions(player);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removePlayerPermission(String player, String permission) {
 		plugin.config.removePlayerPermission(player, permission);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removePlayerPermission(String player, String world, String permission) {
 		plugin.config.removePlayerPermission(player, world, permission);
+		refreshPermissions();
 	}
 
 	@Override
@@ -111,16 +120,19 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void addGroupInheritance(String group, String inherit) {
 		plugin.config.addGroupInheritance(group, inherit);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeGroupInheritance(String group, String inherit) {
 		plugin.config.removeGroupInheritance(group, inherit);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeGroupInheritances(String group) {
 		plugin.config.removeGroupInheritances(group);
+		refreshPermissions();
 	}
 
 	@Override
@@ -136,31 +148,37 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void addGroupPermission(String group, String world, String permission, boolean value) {
 		plugin.config.addGroupPermission(group, world, permission, value);
+		refreshPermissions();
 	}
 
 	@Override
 	public void addGroupPermission(String group, String permission, boolean value) {
 		plugin.config.addGroupPermission(group, permission, value);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeGroupPermission(String group, String world, String permission) {
 		plugin.config.removeGroupPermission(group, world, permission);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeGroupPermission(String group, String permission) {
 		plugin.config.removeGroupPermission(group, permission);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeGroupPermissions(String group) {
 		plugin.config.removeGroupPermissions(group);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeGroup(String group) {
 		plugin.config.removeGroup(group);
+		refreshPermissions();
 	}
 
 	@Override
@@ -176,11 +194,13 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void addMessage(String key, String message) {
 		plugin.config.addMessage(key, message);
+		refreshPermissions();
 	}
 
 	@Override
 	public void removeMessage(String key) {
 		plugin.config.removeMessage(key);
+		refreshPermissions();
 	}
 
 	@Override
@@ -191,6 +211,7 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void setDefaultGroup(String group) {
 		plugin.config.setDefaultGroup(group);
+		refreshPermissions();
 	}
 
 	@Override
@@ -201,6 +222,7 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void setDebug(boolean debug) {
 		plugin.config.setDebug(debug);
+		refreshPermissions();
 	}
 
 	public void refreshPermissions() {
