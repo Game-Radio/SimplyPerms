@@ -11,6 +11,8 @@ public interface PermsConfig {
 
 	public void removePlayerGroup(String player, String group);
 
+	public void setPlayerGroup(String player, String group);
+
 	public void addPlayerGroup(String player, String group);
 
 	public void addPlayerPermission(String player, String permission, boolean value);

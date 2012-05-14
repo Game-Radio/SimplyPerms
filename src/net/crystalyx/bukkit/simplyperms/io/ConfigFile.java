@@ -37,6 +37,12 @@ public class ConfigFile implements PermsConfig {
 	}
 
 	@Override
+	public void setPlayerGroup(String player, String group) {
+		removePlayerGroups(player);
+		addPlayerGroup(player, group);
+	}
+
+	@Override
 	public void addPlayerGroup(String player, String group) {
 		player = player.toLowerCase();
 		if (group.isEmpty()) return;

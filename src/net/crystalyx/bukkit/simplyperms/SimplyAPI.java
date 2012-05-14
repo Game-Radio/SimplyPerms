@@ -32,6 +32,12 @@ public class SimplyAPI implements PermsConfig {
 	}
 
 	@Override
+	public void setPlayerGroup(String player, String group) {
+		plugin.config.setPlayerGroup(player, group);
+		refreshPermissions();
+	}
+
+	@Override
 	public void addPlayerGroup(String player, String group) {
 		plugin.config.addPlayerGroup(player, group);
 		refreshPermissions();

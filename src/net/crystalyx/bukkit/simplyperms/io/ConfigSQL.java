@@ -113,6 +113,12 @@ public class ConfigSQL implements PermsConfig {
 		}
 	}
 
+	@Override
+	public void setPlayerGroup(String player, String group) {
+		removePlayerGroups(player);
+		addPlayerGroup(player, group);
+	}
+
 	private void addPlayerGroup(String player, String group, boolean first) {
 		if (init()) {
 			try {
