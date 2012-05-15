@@ -183,7 +183,6 @@ public class SimplyCommands implements CommandExecutor {
 
 			try {
 				manager.run();
-				plugin.refreshPermissions();
 				sender.sendMessage(ChatColor.GREEN + "Operation success !");
 			} catch (Exception e) {
 				plugin.reloadConfig();
