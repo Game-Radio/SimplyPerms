@@ -325,7 +325,7 @@ public class SimplyCommands implements CommandExecutor {
 				plugin.config.addPlayerGroup(player, group);
 			}
 
-			plugin.refreshPermissions();
+			plugin.refreshPlayerPermissions(player);
 
 			sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is now in " + ChatColor.WHITE + split[3] + ChatColor.GREEN + ".");
 			return true;
@@ -341,7 +341,7 @@ public class SimplyCommands implements CommandExecutor {
 			}
 			plugin.config.addPlayerGroup(player, group);
 
-			plugin.refreshPermissions();
+			plugin.refreshPlayerPermissions(player);
 
 			sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is now in " + ChatColor.WHITE + group + ChatColor.GREEN + ".");
 			return true;
@@ -357,7 +357,7 @@ public class SimplyCommands implements CommandExecutor {
 			}
 			plugin.config.removePlayerGroup(player, group);
 
-			plugin.refreshPermissions();
+			plugin.refreshPlayerPermissions(player);
 
 			sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is no longer in " + ChatColor.WHITE + group + ChatColor.GREEN + ".");
 			return true;
@@ -372,7 +372,7 @@ public class SimplyCommands implements CommandExecutor {
 			}
 
 			plugin.config.removePlayer(player);
-			plugin.refreshPermissions();
+			plugin.refreshPlayerPermissions(player);
 
 			sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " is no longer in config file.");
 			return true;
@@ -390,7 +390,7 @@ public class SimplyCommands implements CommandExecutor {
 			}
 
 			plugin.config.addPlayerPermission(player, world, perm, value);
-			plugin.refreshPermissions();
+			plugin.refreshPlayerPermissions(player);
 
 			sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " now has " + ChatColor.WHITE + perm + ChatColor.GREEN + " = " + ChatColor.WHITE + value + ChatColor.GREEN + ".");
 			return true;
@@ -412,7 +412,7 @@ public class SimplyCommands implements CommandExecutor {
 				return true;
 			}
 			plugin.config.removePlayerPermission(player, world, perm);
-			plugin.refreshPermissions();
+			plugin.refreshPlayerPermissions(player);
 
 			sender.sendMessage(ChatColor.GREEN + "Player " + ChatColor.WHITE + player + ChatColor.GREEN + " no longer has " + ChatColor.WHITE + perm + ChatColor.GREEN + " set.");
 			return true;
