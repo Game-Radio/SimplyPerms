@@ -185,8 +185,6 @@ public class SimplyCommands implements CommandExecutor {
 				manager.run();
 				sender.sendMessage(ChatColor.GREEN + "Operation success !");
 			} catch (Exception e) {
-				plugin.reloadConfig();
-				plugin.refreshPermissions();
 				sender.sendMessage(ChatColor.RED + "An error occurred ! Please check server log...");
 				e.printStackTrace();
 			}
