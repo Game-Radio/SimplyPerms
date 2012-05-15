@@ -16,61 +16,61 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void removePlayer(String player) {
 		plugin.config.removePlayer(player);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void removePlayerGroups(String player) {
 		plugin.config.removePlayerGroups(player);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void removePlayerGroup(String player, String group) {
 		plugin.config.removePlayerGroup(player, group);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void setPlayerGroup(String player, String group) {
 		plugin.config.setPlayerGroup(player, group);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void addPlayerGroup(String player, String group) {
 		plugin.config.addPlayerGroup(player, group);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void addPlayerPermission(String player, String permission, boolean value) {
 		plugin.config.addPlayerPermission(player, permission, value);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void addPlayerPermission(String player, String world, String permission, boolean value) {
 		plugin.config.addPlayerPermission(player, world, permission, value);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void removePlayerPermissions(String player) {
 		plugin.config.removePlayerPermissions(player);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void removePlayerPermission(String player, String permission) {
 		plugin.config.removePlayerPermission(player, permission);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
 	public void removePlayerPermission(String player, String world, String permission) {
 		plugin.config.removePlayerPermission(player, world, permission);
-		refreshPermissions();
+		plugin.refreshPlayerPermissions(player);
 	}
 
 	@Override
@@ -200,13 +200,13 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void addMessage(String key, String message) {
 		plugin.config.addMessage(key, message);
-		refreshPermissions();
+		plugin.refreshConfig();
 	}
 
 	@Override
 	public void removeMessage(String key) {
 		plugin.config.removeMessage(key);
-		refreshPermissions();
+		plugin.refreshConfig();
 	}
 
 	@Override
@@ -228,7 +228,7 @@ public class SimplyAPI implements PermsConfig {
 	@Override
 	public void setDebug(boolean debug) {
 		plugin.config.setDebug(debug);
-		refreshPermissions();
+		plugin.refreshConfig();
 	}
 
 	public void refreshPermissions() {
