@@ -145,20 +145,28 @@ public class SimplyPlugin extends JavaPlugin {
 		}
 	}
 
-	protected void refreshPermissions() {
+	protected void refreshConfig() {
 		try {
 			getConfig().save(configFile);
 			reloadConfig();
 		} catch (IOException e) {
 			getLogger().warning("Failed to write changed config.yml: " + e.getMessage());
 		}
-		for (String player : permissions.keySet()) {
-			PermissionAttachment attachment = permissions.get(player);
-			for (String key : attachment.getPermissions().keySet()) {
-				attachment.unsetPermission(key);
-			}
+	}
 
-			calculateAttachment(getServer().getPlayer(player));
+	protected void refreshPlayerPermissions(String player) {
+		refreshConfig();
+		PermissionAttachment attachment = permissions.get(player);
+		for (String key : attachment.getPermissions().keySet()) {
+			attachment.unsetPermission(key);
+		}
+		calculateAttachment(getServer().getPlayer(player));
+	}
+
+	protected void refreshPermissions() {
+		refreshConfig();
+		for (String player : permissions.keySet()) {
+			refreshPlayerPermissions(player);
 		}
 	}
 
