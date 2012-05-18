@@ -71,9 +71,11 @@ public abstract class SimplyPrevents implements Listener {
 		long current = System.currentTimeMillis();
 
 		if (next.longValue() < current) {
-			player.sendMessage(plugin.config.getMessage(node));
-			plugin.debug("Event '" + node + "' cancelled for " + player.getName());
-			throttleTimestamps.put(player, Long.valueOf(current + 3000));
+			if (!plugin.config.getMessage(node).isEmpty()) {
+				player.sendMessage(plugin.config.getMessage(node));
+				plugin.debug("Event '" + node + "' cancelled for " + player.getName());
+				throttleTimestamps.put(player, Long.valueOf(current + 3000));
+			}
 		}
 	}
 
