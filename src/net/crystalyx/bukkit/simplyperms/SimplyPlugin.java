@@ -156,6 +156,7 @@ public class SimplyPlugin extends JavaPlugin {
 
 	protected void refreshPlayerPermissions(String player) {
 		refreshConfig();
+		if (getServer().getPlayer(player) == null) return;
 		PermissionAttachment attachment = permissions.get(getServer().getPlayer(player).getName());
 		for (String key : attachment.getPermissions().keySet()) {
 			attachment.unsetPermission(key);
