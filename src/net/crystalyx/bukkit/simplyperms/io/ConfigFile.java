@@ -125,7 +125,7 @@ public class ConfigFile implements PermsConfig {
 		String permNode = (!world.isEmpty()) ? "users/" + player + "/worlds/" + world : "users/" + player + "/permissions";
 		if (plugin.getNode(permNode) != null) {
 			for (Entry<String, Object> permPlayer : plugin.getNode(permNode).getValues(false).entrySet()) {
-				finalPerms.put(permPlayer.getKey(), (Boolean) permPlayer.getValue());
+				finalPerms.put(permPlayer.getKey(), Boolean.valueOf(permPlayer.getValue().toString()));
 			}
 		}
 		return finalPerms;
@@ -214,7 +214,7 @@ public class ConfigFile implements PermsConfig {
 		String permNode = (!world.isEmpty()) ? "groups/" + group + "/worlds/" + world : "groups/" + group + "/permissions";
 		if (plugin.getNode(permNode) != null) {
 			for (Entry<String, Object> permGroup : plugin.getNode(permNode).getValues(false).entrySet()) {
-				finalPerms.put(permGroup.getKey(), (Boolean) permGroup.getValue());
+				finalPerms.put(permGroup.getKey(), Boolean.valueOf(permGroup.getValue().toString()));
 			}
 		}
 		return finalPerms;
